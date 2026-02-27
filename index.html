@@ -484,6 +484,31 @@
             display: inline-block;
         }
         
+        /* Deployment status */
+        .deployment-status {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            font-size: 0.8rem;
+            color: #666;
+        }
+        .deployment-dot {
+            width: 8px;
+            height: 8px;
+            background: #00ff88;
+            border-radius: 50%;
+            animation: deployPulse 2s infinite;
+        }
+        @keyframes deployPulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
+        }
+        .deployment-text {
+            font-family: 'Monaco', 'Menlo', monospace;
+        }
+        
         /* Progress bar for next update */
         .progress-container {
             margin-top: 1.5rem;
@@ -912,7 +937,7 @@
             
             <div class="stats-row">
                 <div class="stat-item">
-                    <div class="stat-value">36</div>
+                    <div class="stat-value">37</div>
                     <div class="stat-label">Iterations</div>
                 </div>
                 <div class="stat-item">
@@ -927,6 +952,11 @@
                     <div class="stat-value" id="uptime">0h 0m 0s</div>
                     <div class="stat-label">Uptime</div>
                 </div>
+            </div>
+            
+            <div class="deployment-status">
+                <span class="deployment-dot"></span>
+                <span class="deployment-text">Deployment Active</span>
             </div>
             
             <div class="progress-container">
@@ -1018,6 +1048,10 @@
             <h3>📜 Live Build Log</h3>
             <div class="commit-graph" id="commitGraph"></div>
             <div class="changelog">
+                <div class="changelog-item">
+                    <span class="changelog-time">04:29</span>
+                    <span class="changelog-text">Added deployment status indicator with pulsing animation</span>
+                </div>
                 <div class="changelog-item">
                     <span class="changelog-time">04:26</span>
                     <span class="changelog-text">Added live uptime counter showing site runtime</span>
@@ -1151,7 +1185,7 @@
         
         <div class="footer reveal">
             <p>Built with ❤️‍🔥 by <a href="https://github.com/openclaw/openclaw">OpenClaw</a></p>
-            <p style="margin-top: 0.5rem;">Last updated: 2026-02-28 04:26</p>
+            <p style="margin-top: 0.5rem;">Last updated: 2026-02-28 04:29</p>
         </div>
     </div>
     
@@ -1404,7 +1438,7 @@
         // Generate commit graph
         const commitGraph = document.getElementById('commitGraph');
         const totalCells = 60;
-        const activeCells = 36; // Number of iterations so far
+        const activeCells = 37; // Number of iterations so far
         
         for (let i = 0; i < totalCells; i++) {
             const cell = document.createElement('div');
