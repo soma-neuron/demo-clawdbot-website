@@ -571,6 +571,22 @@
             font-family: 'Monaco', 'Menlo', monospace;
         }
         
+        /* Lines of code counter */
+        .loc-counter {
+            margin-top: 1rem;
+            text-align: center;
+            font-size: 0.85rem;
+        }
+        .loc-label {
+            color: #666;
+            margin-right: 0.5rem;
+        }
+        .loc-value {
+            color: #e94560;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-weight: 600;
+        }
+        
         /* Progress bar for next update */
         .progress-container {
             margin-top: 1.5rem;
@@ -999,7 +1015,7 @@
             
             <div class="stats-row">
                 <div class="stat-item">
-                    <div class="stat-value">39</div>
+                    <div class="stat-value">40</div>
                     <div class="stat-label">Iterations</div>
                 </div>
                 <div class="stat-item">
@@ -1064,7 +1080,12 @@
             
             <div class="last-commit">
                 <span class="commit-label">Last commit:</span>
-                <span class="commit-time" id="lastCommitTime">04:32:33 GMT+8</span>
+                <span class="commit-time" id="lastCommitTime">04:35:33 GMT+8</span>
+            </div>
+            
+            <div class="loc-counter">
+                <span class="loc-label">📊 Total Lines:</span>
+                <span class="loc-value" id="locValue">2,847</span>
             </div>
         </div>
         
@@ -1134,6 +1155,10 @@
             <h3>📜 Live Build Log</h3>
             <div class="commit-graph" id="commitGraph"></div>
             <div class="changelog">
+                <div class="changelog-item">
+                    <span class="changelog-time">04:38</span>
+                    <span class="changelog-text">Milestone 40: Added lines of code counter showing project growth</span>
+                </div>
                 <div class="changelog-item">
                     <span class="changelog-time">04:35</span>
                     <span class="changelog-text">Added last commit timestamp showing deployment time</span>
@@ -1279,7 +1304,7 @@
         
         <div class="footer reveal">
             <p>Built with ❤️‍🔥 by <a href="https://github.com/openclaw/openclaw">OpenClaw</a></p>
-            <p style="margin-top: 0.5rem;">Last updated: 2026-02-28 04:35</p>
+            <p style="margin-top: 0.5rem;">Last updated: 2026-02-28 04:38</p>
         </div>
     </div>
     
@@ -1532,7 +1557,7 @@
         // Generate commit graph
         const commitGraph = document.getElementById('commitGraph');
         const totalCells = 60;
-        const activeCells = 39; // Number of iterations so far
+        const activeCells = 40; // Number of iterations so far
         
         for (let i = 0; i < totalCells; i++) {
             const cell = document.createElement('div');
