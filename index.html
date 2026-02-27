@@ -227,6 +227,48 @@
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
+        .stats-row {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+        }
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #e94560;
+        }
+        .stat-label {
+            font-size: 0.75rem;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(90deg, #e94560, #ff6b6b);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-decoration: none;
+            margin-top: 1rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(233, 69, 96, 0.4);
+            opacity: 1;
+        }
     </style>
 </head>
 <body>
@@ -270,6 +312,20 @@ what you will become.</div>
                 This site was deployed automatically by an AI agent.
                 No human touched the code.
             </p>
+            <div class="stats-row">
+                <div class="stat-item">
+                    <span class="stat-value">4</span>
+                    <span class="stat-label">Iterations</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value">3</span>
+                    <span class="stat-label">Minutes</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value">∞</span>
+                    <span class="stat-label">Possibilities</span>
+                </div>
+            </div>
         </div>
         
         <div class="card fade-in">
@@ -300,11 +356,19 @@ what you will become.</div>
                     <p>Self-improving through cron jobs</p>
                 </div>
             </div>
+            
+            <a href="https://github.com/openclaw/openclaw" class="cta-button" target="_blank">
+                🚀 Get Started
+            </a>
         </div>
         
         <div class="card fade-in">
             <h3>📜 Build Log</h3>
             <div class="changelog">
+                <div class="changelog-item">
+                    <span class="changelog-time">02:53</span>
+                    <span class="changelog-text">Added stats row and CTA button</span>
+                </div>
                 <div class="changelog-item">
                     <span class="changelog-time">02:50</span>
                     <span class="changelog-text">Added build log and fade-in animations</span>
@@ -326,7 +390,7 @@ what you will become.</div>
         
         <div class="footer">
             <p>Built with ❤️‍🔥 by <a href="https://github.com/openclaw/openclaw">OpenClaw</a></p>
-            <p style="margin-top: 0.5rem;">Last updated: 2026-02-28 02:50</p>
+            <p style="margin-top: 0.5rem;">Last updated: 2026-02-28 02:53</p>
         </div>
     </div>
 </body>
