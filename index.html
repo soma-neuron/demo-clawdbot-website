@@ -509,6 +509,51 @@
             font-family: 'Monaco', 'Menlo', monospace;
         }
         
+        /* System metrics panel */
+        .system-panel {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .system-panel h4 {
+            font-size: 0.9rem;
+            color: #888;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        .metric-row {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 0.75rem;
+        }
+        .metric-label {
+            font-size: 0.75rem;
+            color: #666;
+            width: 60px;
+            text-align: right;
+            font-family: 'Monaco', 'Menlo', monospace;
+        }
+        .metric-bar {
+            flex: 1;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        .metric-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #e94560, #ff6b6b);
+            border-radius: 3px;
+            transition: width 0.5s ease;
+        }
+        .metric-value {
+            font-size: 0.75rem;
+            color: #888;
+            width: 40px;
+            font-family: 'Monaco', 'Menlo', monospace;
+        }
+        
         /* Progress bar for next update */
         .progress-container {
             margin-top: 1.5rem;
@@ -937,7 +982,7 @@
             
             <div class="stats-row">
                 <div class="stat-item">
-                    <div class="stat-value">37</div>
+                    <div class="stat-value">38</div>
                     <div class="stat-label">Iterations</div>
                 </div>
                 <div class="stat-item">
@@ -979,6 +1024,25 @@
                 <div class="wave-bar"></div>
                 <div class="wave-bar"></div>
                 <div class="wave-bar"></div>
+            </div>
+            
+            <div class="system-panel">
+                <h4>🔧 System Metrics</h4>
+                <div class="metric-row">
+                    <span class="metric-label">CPU</span>
+                    <div class="metric-bar"><div class="metric-fill" style="width: 23%"></div></div>
+                    <span class="metric-value">23%</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Memory</span>
+                    <div class="metric-bar"><div class="metric-fill" style="width: 45%"></div></div>
+                    <span class="metric-value">45%</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">AI Load</span>
+                    <div class="metric-bar"><div class="metric-fill" style="width: 78%"></div></div>
+                    <span class="metric-value">78%</span>
+                </div>
             </div>
         </div>
         
@@ -1048,6 +1112,10 @@
             <h3>📜 Live Build Log</h3>
             <div class="commit-graph" id="commitGraph"></div>
             <div class="changelog">
+                <div class="changelog-item">
+                    <span class="changelog-time">04:32</span>
+                    <span class="changelog-text">Added system metrics panel with CPU, Memory, AI Load bars</span>
+                </div>
                 <div class="changelog-item">
                     <span class="changelog-time">04:29</span>
                     <span class="changelog-text">Added deployment status indicator with pulsing animation</span>
@@ -1185,7 +1253,7 @@
         
         <div class="footer reveal">
             <p>Built with ❤️‍🔥 by <a href="https://github.com/openclaw/openclaw">OpenClaw</a></p>
-            <p style="margin-top: 0.5rem;">Last updated: 2026-02-28 04:29</p>
+            <p style="margin-top: 0.5rem;">Last updated: 2026-02-28 04:32</p>
         </div>
     </div>
     
@@ -1438,7 +1506,7 @@
         // Generate commit graph
         const commitGraph = document.getElementById('commitGraph');
         const totalCells = 60;
-        const activeCells = 37; // Number of iterations so far
+        const activeCells = 38; // Number of iterations so far
         
         for (let i = 0; i < totalCells; i++) {
             const cell = document.createElement('div');
