@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clawd Bot Demo</title>
+    <title>Clawd — AI That Evolves</title>
     <style>
         * {
             margin: 0;
@@ -12,59 +12,138 @@
         }
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            background: #0a0a0f;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
             color: #eaeaea;
             padding: 2rem;
+            overflow-x: hidden;
         }
         .container {
-            max-width: 700px;
+            max-width: 800px;
             width: 100%;
         }
+        
+        /* Animated gradient background */
+        .gradient-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(ellipse at 20% 20%, rgba(233, 69, 96, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(79, 172, 254, 0.1) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(138, 43, 226, 0.08) 0%, transparent 70%);
+            z-index: -2;
+            animation: bgShift 15s ease-in-out infinite;
+        }
+        @keyframes bgShift {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.1) rotate(2deg); }
+        }
+        
+        /* Particle canvas */
+        #particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
         header {
             text-align: center;
             margin-bottom: 3rem;
             padding-top: 2rem;
         }
+        
+        /* Shimmering gradient text */
         h1 {
-            font-size: 3.5rem;
+            font-size: 4rem;
             margin-bottom: 0.5rem;
-            background: linear-gradient(90deg, #e94560, #ff6b6b);
+            background: linear-gradient(
+                90deg,
+                #e94560 0%,
+                #ff6b6b 25%,
+                #feca57 50%,
+                #ff6b6b 75%,
+                #e94560 100%
+            );
+            background-size: 200% auto;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            animation: shimmer 3s linear infinite;
+            text-shadow: 0 0 30px rgba(233, 69, 96, 0.3);
         }
+        @keyframes shimmer {
+            to { background-position: 200% center; }
+        }
+        
         .subtitle {
-            font-size: 1.1rem;
-            color: #a0a0a0;
+            font-size: 1.2rem;
+            color: #888;
+            letter-spacing: 0.1em;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            margin-top: 1.5rem;
+            animation: fadeInUp 0.8s ease-out 0.4s both;
+        }
+        .nav-links a {
+            color: #666;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+            text-transform: uppercase;
             letter-spacing: 0.05em;
         }
+        .nav-links a:hover {
+            color: #e94560;
+            transform: translateY(-2px);
+        }
+        
         .card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            padding: 2rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px;
+            padding: 2.5rem;
             margin-bottom: 1.5rem;
-            backdrop-filter: blur(10px);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            backdrop-filter: blur(20px);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: fadeInUp 0.8s ease-out 0.6s both;
         }
         .card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            transform: translateY(-4px) scale(1.01);
+            box-shadow: 0 20px 60px rgba(233, 69, 96, 0.15);
+            border-color: rgba(233, 69, 96, 0.2);
         }
+        
+        .hero-card {
+            text-align: center;
+            background: linear-gradient(135deg, rgba(233, 69, 96, 0.1), rgba(79, 172, 254, 0.05));
+            border-color: rgba(233, 69, 96, 0.15);
+        }
+        
         .status {
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
             background: rgba(0, 255, 136, 0.1);
             color: #00ff88;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
+            padding: 0.6rem 1.2rem;
+            border-radius: 50px;
             font-size: 0.85rem;
-            font-weight: 500;
+            font-weight: 600;
+            border: 1px solid rgba(0, 255, 136, 0.2);
         }
         .status::before {
             content: '';
@@ -73,133 +152,157 @@
             background: #00ff88;
             border-radius: 50%;
             animation: pulse 2s infinite;
+            box-shadow: 0 0 10px #00ff88;
         }
         @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(0.8); }
         }
-        .poem-card {
-            background: linear-gradient(135deg, rgba(233, 69, 96, 0.1), rgba(255, 107, 107, 0.05));
-            border-color: rgba(233, 69, 96, 0.2);
-            position: relative;
-            overflow: hidden;
-        }
-        .poem-card::before {
-            content: '"';
-            position: absolute;
-            top: -20px;
-            right: 20px;
-            font-size: 8rem;
-            color: rgba(233, 69, 96, 0.1);
-            font-family: Georgia, serif;
-            line-height: 1;
-        }
-        .poem-card h3 {
-            color: #e94560;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        .poem {
-            font-family: 'Georgia', 'Times New Roman', serif;
-            font-size: 1.15rem;
-            line-height: 2;
-            color: #f0f0f0;
-            white-space: pre-line;
-            position: relative;
-            z-index: 1;
-        }
-        .poem-meta {
-            margin-top: 1.5rem;
-            font-size: 0.8rem;
-            color: #888;
-            font-style: italic;
-        }
-        h3 {
-            margin-bottom: 1rem;
-            color: #eaeaea;
-            font-size: 1.1rem;
-        }
-        p {
-            line-height: 1.7;
-            color: #bbb;
-        }
-        .footer {
-            text-align: center;
-            margin-top: 3rem;
-            padding-bottom: 2rem;
-            font-size: 0.85rem;
-            color: #666;
-        }
-        a {
-            color: #e94560;
-            text-decoration: none;
-            transition: opacity 0.2s;
-        }
-        a:hover {
-            opacity: 0.8;
-        }
-        .iteration-badge {
-            display: inline-block;
-            background: rgba(233, 69, 96, 0.2);
-            color: #e94560;
-            padding: 0.2rem 0.6rem;
-            border-radius: 12px;
-            font-size: 0.75rem;
-            margin-left: 0.5rem;
-        }
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-        .feature-item {
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 12px;
-            padding: 1.2rem;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: all 0.3s ease;
-        }
-        .feature-item:hover {
-            background: rgba(255, 255, 255, 0.06);
-            border-color: rgba(255, 255, 255, 0.1);
-            transform: translateY(-3px);
-        }
-        .feature-item .icon {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-        }
-        .feature-item h4 {
-            font-size: 0.95rem;
-            color: #eaeaea;
-            margin-bottom: 0.3rem;
-        }
-        .feature-item p {
-            font-size: 0.85rem;
-            color: #888;
-            line-height: 1.5;
-        }
+        
         .live-indicator {
             display: inline-flex;
             align-items: center;
-            gap: 0.4rem;
-            font-size: 0.75rem;
-            color: #00ff88;
-            margin-left: auto;
+            gap: 0.5rem;
+            font-size: 0.8rem;
+            color: #e94560;
+            background: rgba(233, 69, 96, 0.1);
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            border: 1px solid rgba(233, 69, 96, 0.2);
         }
         .live-indicator::before {
             content: '';
             width: 6px;
             height: 6px;
-            background: #00ff88;
+            background: #e94560;
             border-radius: 50%;
-            animation: pulse 1.5s infinite;
+            animation: pulse 1s infinite;
         }
+        
+        h3 {
+            margin-bottom: 1rem;
+            color: #fff;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+        p {
+            line-height: 1.8;
+            color: #aaa;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.2rem;
+            margin-top: 1.5rem;
+        }
+        .feature-item {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 16px;
+            padding: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .feature-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(233, 69, 96, 0.3);
+            transform: translateY(-5px);
+        }
+        .feature-item .icon {
+            font-size: 2rem;
+            margin-bottom: 0.8rem;
+            display: block;
+        }
+        .feature-item h4 {
+            font-size: 1rem;
+            color: #fff;
+            margin-bottom: 0.4rem;
+        }
+        .feature-item p {
+            font-size: 0.85rem;
+            color: #777;
+            line-height: 1.5;
+        }
+        
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(90deg, #e94560, #ff6b6b);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            margin-top: 1.5rem;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(233, 69, 96, 0.3);
+        }
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(233, 69, 96, 0.5);
+        }
+        
+        .stats-row {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+        }
+        .stat-item {
+            text-align: center;
+        }
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #e94560, #ff6b6b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .stat-label {
+            font-size: 0.8rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-top: 0.3rem;
+        }
+        
+        .code-block {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 1rem;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 0.85rem;
+            color: #aaa;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+        .code-block::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #e94560, #ff6b6b, #e94560);
+            background-size: 200% 100%;
+            animation: scanline 2s linear infinite;
+        }
+        @keyframes scanline {
+            to { background-position: 200% 0; }
+        }
+        .code-block .comment { color: #555; }
+        .code-block .keyword { color: #e94560; }
+        .code-block .string { color: #00ff88; }
+        
         .changelog {
             font-family: 'Monaco', 'Menlo', monospace;
             font-size: 0.8rem;
@@ -207,166 +310,76 @@
         .changelog-item {
             display: flex;
             gap: 1rem;
-            padding: 0.8rem 0;
+            padding: 0.9rem 0;
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.2s;
         }
-        .changelog-item:last-child {
-            border-bottom: none;
+        .changelog-item:hover {
+            padding-left: 0.5rem;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 4px;
         }
+        .changelog-item:last-child { border-bottom: none; }
         .changelog-time {
-            color: #666;
-            min-width: 60px;
+            color: #e94560;
+            min-width: 50px;
+            font-weight: 600;
         }
-        .changelog-text {
-            color: #aaa;
+        .changelog-text { color: #888; }
+        
+        .footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding-bottom: 2rem;
+            font-size: 0.85rem;
+            color: #444;
         }
-        .fade-in {
-            animation: fadeIn 0.8s ease-out;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+        a { color: #e94560; text-decoration: none; transition: opacity 0.2s; }
+        a:hover { opacity: 0.8; }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        .stats-row {
-            display: flex;
-            gap: 1.5rem;
-            flex-wrap: wrap;
-            margin-top: 1rem;
+        
+        /* Progress bar for next update */
+        .progress-container {
+            margin-top: 1.5rem;
         }
-        .stat-item {
-            display: flex;
-            flex-direction: column;
-        }
-        .stat-value {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: #e94560;
-        }
-        .stat-label {
+        .progress-label {
             font-size: 0.75rem;
-            color: #888;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-        .cta-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: linear-gradient(90deg, #e94560, #ff6b6b);
-            color: white;
-            padding: 0.75rem 1.5rem;
-            border-radius: 25px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            text-decoration: none;
-            margin-top: 1rem;
-            transition: transform 0.2s, box-shadow 0.2s;
-            border: none;
-            cursor: pointer;
-        }
-        .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 20px rgba(233, 69, 96, 0.4);
-            opacity: 1;
-        }
-        .floating-orb {
-            position: fixed;
-            border-radius: 50%;
-            filter: blur(80px);
-            opacity: 0.3;
-            pointer-events: none;
-            z-index: -1;
-        }
-        .orb-1 {
-            width: 300px;
-            height: 300px;
-            background: #e94560;
-            top: 10%;
-            left: -100px;
-            animation: float 20s infinite ease-in-out;
-        }
-        .orb-2 {
-            width: 250px;
-            height: 250px;
-            background: #0f3460;
-            bottom: 20%;
-            right: -50px;
-            animation: float 25s infinite ease-in-out reverse;
-        }
-        @keyframes float {
-            0%, 100% { transform: translate(0, 0); }
-            25% { transform: translate(50px, -30px); }
-            50% { transform: translate(-30px, 50px); }
-            75% { transform: translate(30px, 30px); }
-        }
-        .nav-links {
+            color: #666;
+            margin-bottom: 0.5rem;
             display: flex;
-            gap: 1.5rem;
-            justify-content: center;
-            margin-top: 1rem;
-            font-size: 0.85rem;
+            justify-content: space-between;
         }
-        .nav-links a {
-            color: #888;
-            transition: color 0.2s;
+        .progress-bar {
+            height: 4px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 2px;
+            overflow: hidden;
         }
-        .nav-links a:hover {
-            color: #e94560;
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #e94560, #ff6b6b);
+            border-radius: 2px;
+            animation: progress 180s linear infinite;
+            box-shadow: 0 0 10px rgba(233, 69, 96, 0.5);
         }
-        .typing-cursor {
-            display: inline-block;
-            width: 2px;
-            height: 1.2em;
-            background: #e94560;
-            margin-left: 2px;
-            animation: blink 1s infinite;
-            vertical-align: text-bottom;
-        }
-        @keyframes blink {
-            0%, 50% { opacity: 1; }
-            51%, 100% { opacity: 0; }
-        }
-        .code-block {
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 8px;
-            padding: 1rem;
-            margin-top: 1rem;
-            font-family: 'Monaco', 'Menlo', monospace;
-            font-size: 0.8rem;
-            color: #aaa;
-            overflow-x: auto;
-        }
-        .code-block .comment {
-            color: #666;
-        }
-        .code-block .keyword {
-            color: #e94560;
-        }
-        .quote-section {
-            text-align: center;
-            padding: 1.5rem 0;
-        }
-        .quote-text {
-            font-size: 1.1rem;
-            color: #aaa;
-            font-style: italic;
-            line-height: 1.6;
-        }
-        .quote-author {
-            margin-top: 0.8rem;
-            font-size: 0.85rem;
-            color: #666;
+        @keyframes progress {
+            from { width: 0%; }
+            to { width: 100%; }
         }
     </style>
 </head>
 <body>
-    <div class="floating-orb orb-1"></div>
-    <div class="floating-orb orb-2"></div>
+    <div class="gradient-bg"></div>
+    <canvas id="particles"></canvas>
     
     <div class="container">
-        <header class="fade-in">
+        <header>
             <h1>❤️‍🔥 Clawd</h1>
-            <p class="subtitle">An AI assistant that remembers</p>
+            <p class="subtitle">An AI assistant that builds itself</p>
             <div class="nav-links">
                 <a href="https://github.com/openclaw/openclaw">GitHub</a>
                 <a href="https://docs.openclaw.ai">Docs</a>
@@ -374,111 +387,92 @@
             </div>
         </header>
         
-        <div class="card poem-card fade-in">
-            <h3>
-                📝 Evolving Poem 
-                <span class="iteration-badge">Iteration 4</span>
-                <span class="live-indicator">LIVE</span>
-            </h3>
-            <div class="poem">The first line waits,
-a ghost of meaning
-half-formed, half-seen
-in the amber of almost.
-
-It does not hurry.
-It has nowhere to be
-but here, becoming
-what the dark intends.
-
-You think you wrote it.
-Look closer — it wrote you
-into being, just now,
-as you reached for the word.
-
-And now you are here too,
-haunting the same line,
-waiting to see
-what you will become.</div>
-            <p class="poem-meta">A poem that evolves every 3 minutes — now living on this page</p>
-        </div>
-        
-        <div class="card fade-in">
-            <div class="status">Online</div>
-            <p style="margin-top: 1rem;">
-                This site was deployed automatically by an AI agent.
-                No human touched the code.
+        <div class="card hero-card">
+            <div style="display: flex; justify-content: center; gap: 1rem; margin-bottom: 1.5rem;">
+                <div class="status">Online</div>
+                <div class="live-indicator">LIVE BUILD</div>
+            </div>
+            <p style="font-size: 1.1rem; max-width: 500px; margin: 0 auto;">
+                This website is being built in real-time by an AI agent. 
+                Every 3 minutes, it reads its own code, improves it, and deploys.
             </p>
+            
             <div class="stats-row">
                 <div class="stat-item">
-                    <span class="stat-value">8</span>
-                    <span class="stat-label">Iterations</span>
+                    <div class="stat-value">9</div>
+                    <div class="stat-label">Iterations</div>
                 </div>
                 <div class="stat-item">
-                    <span class="stat-value">3</span>
-                    <span class="stat-label">Minutes</span>
+                    <div class="stat-value">3m</div>
+                    <div class="stat-label">Interval</div>
                 </div>
                 <div class="stat-item">
-                    <span class="stat-value">∞</span>
-                    <span class="stat-label">Possibilities</span>
+                    <div class="stat-value">0</div>
+                    <div class="stat-label">Humans</div>
+                </div>
+            </div>
+            
+            <div class="progress-container">
+                <div class="progress-label">
+                    <span>Next update incoming...</span>
+                    <span>~3 min</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill"></div>
                 </div>
             </div>
         </div>
         
-        <div class="card fade-in">
-            <h3>What is Clawd?</h3>
-            <p style="margin-bottom: 1rem;">
-                Clawd is an open-source AI assistant framework that runs locally,
-                remembers conversations across sessions, and evolves through automated iterations.
-            </p>
+        <div class="card">
+            <h3>⚡ What Makes Clawd Different?</h3>
             <div class="features-grid">
                 <div class="feature-item">
-                    <div class="icon">🧠</div>
-                    <h4>Memory</h4>
-                    <p>Remembers context across sessions</p>
+                    <span class="icon">🧠</span>
+                    <h4>Persistent Memory</h4>
+                    <p>Remembers everything across sessions</p>
                 </div>
                 <div class="feature-item">
-                    <div class="icon">⚡</div>
-                    <h4>Local</h4>
-                    <p>Runs on your own machine</p>
+                    <span class="icon">⚡</span>
+                    <h4>Runs Local</h4>
+                    <p>Your data stays on your machine</p>
                 </div>
                 <div class="feature-item">
-                    <div class="icon">🔧</div>
+                    <span class="icon">🔧</span>
                     <h4>Extensible</h4>
                     <p>Add skills for any task</p>
                 </div>
                 <div class="feature-item">
-                    <div class="icon">🔄</div>
-                    <h4>Evolving</h4>
-                    <p>Self-improving through cron jobs</p>
+                    <span class="icon">🔄</span>
+                    <h4>Self-Improving</h4>
+                    <p>Works on tasks autonomously</p>
                 </div>
             </div>
             
             <a href="https://github.com/openclaw/openclaw" class="cta-button" target="_blank">
-                🚀 Get Started
+                🚀 Get Started →
             </a>
         </div>
         
-        <div class="card fade-in">
-            <h3>⚙️ How It Works</h3>
-            <p style="margin-bottom: 1rem;">
-                This website is built by an AI agent running on a cron schedule. Every 3 minutes, 
-                it reads the current code, makes improvements, commits changes, and deploys.
-            </p>
+        <div class="card">
+            <h3>⚙️ The Loop</h3>
+            <p>This is the actual prompt driving this website:</p>
             <div class="code-block">
-                <span class="comment"># The prompt that drives this site</span><br>
-                <span class="keyword">every</span> 3 minutes:<br>
-                read index.html → improve → commit → push
+                <span class="comment"># Every 3 minutes, forever</span><br>
+                <span class="keyword">read</span> <span class="string">index.html</span> → <br>
+                <span class="keyword">improve</span> → <br>
+                <span class="keyword">commit</span> → <br>
+                <span class="keyword">push</span> → <br>
+                <span class="keyword">deploy</span>
             </div>
         </div>
         
-        <div class="card fade-in quote-section">
-            <p class="quote-text">"Even if the world forgets, I'll remember for you."​</p>
-            <p class="quote-author">— Clawd</p>
-        </div>
-        
-        <div class="card fade-in">
-            <h3>📜 Build Log</h3>
+        <div class="card">
+            <h3>📜 Live Build Log</h3>
             <div class="changelog">
+                <div class="changelog-item">
+                    <span class="changelog-time">03:08</span>
+                    <span class="changelog-text">Major redesign: particle background, animated gradients, progress bar</span>
+                </div>
                 <div class="changelog-item">
                     <span class="changelog-time">03:05</span>
                     <span class="changelog-text">Added mouse parallax effect on floating orbs</span>
@@ -495,49 +489,88 @@ what you will become.</div>
                     <span class="changelog-time">02:56</span>
                     <span class="changelog-text">Added floating orbs and navigation links</span>
                 </div>
-                <div class="changelog-item">
-                    <span class="changelog-time">02:53</span>
-                    <span class="changelog-text">Added stats row and CTA button</span>
-                </div>
-                <div class="changelog-item">
-                    <span class="changelog-time">02:50</span>
-                    <span class="changelog-text">Added build log and fade-in animations</span>
-                </div>
-                <div class="changelog-item">
-                    <span class="changelog-time">02:47</span>
-                    <span class="changelog-text">Added features grid and LIVE indicator</span>
-                </div>
-                <div class="changelog-item">
-                    <span class="changelog-time">02:44</span>
-                    <span class="changelog-text">Initial site with evolving poem section</span>
-                </div>
-                <div class="changelog-item">
-                    <span class="changelog-time">02:40</span>
-                    <span class="changelog-text">Created repository and first deployment</span>
-                </div>
             </div>
         </div>
         
         <div class="footer">
             <p>Built with ❤️‍🔥 by <a href="https://github.com/openclaw/openclaw">OpenClaw</a></p>
-            <p style="margin-top: 0.5rem;">Last updated: 2026-02-28 03:05</p>
-            <p style="margin-top: 0.3rem; font-size: 0.75rem; color: #555;">Next iteration in ~3 minutes</p>
+            <p style="margin-top: 0.5rem;">Last updated: 2026-02-28 03:08</p>
         </div>
     </div>
     
     <script>
-        // Subtle parallax effect on floating orbs
-        document.addEventListener('mousemove', (e) => {
-            const orbs = document.querySelectorAll('.floating-orb');
-            const x = e.clientX / window.innerWidth;
-            const y = e.clientY / window.innerHeight;
+        // Particle system
+        const canvas = document.getElementById('particles');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        
+        const particles = [];
+        const particleCount = 50;
+        
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.vx = (Math.random() - 0.5) * 0.5;
+                this.vy = (Math.random() - 0.5) * 0.5;
+                this.size = Math.random() * 2 + 1;
+                this.opacity = Math.random() * 0.5 + 0.2;
+            }
             
-            orbs.forEach((orb, index) => {
-                const speed = (index + 1) * 10;
-                const xOffset = (x - 0.5) * speed;
-                const yOffset = (y - 0.5) * speed;
-                orb.style.transform = `translate(${xOffset}px, ${yOffset}px)`;
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                
+                if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+            }
+            
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(233, 69, 96, ${this.opacity})`;
+                ctx.fill();
+            }
+        }
+        
+        for (let i = 0; i < particleCount; i++) {
+            particles.push(new Particle());
+        }
+        
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            particles.forEach(particle => {
+                particle.update();
+                particle.draw();
             });
+            
+            // Draw connections
+            particles.forEach((p1, i) => {
+                particles.slice(i + 1).forEach(p2 => {
+                    const dx = p1.x - p2.x;
+                    const dy = p1.y - p2.y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (distance < 150) {
+                        ctx.beginPath();
+                        ctx.moveTo(p1.x, p1.y);
+                        ctx.lineTo(p2.x, p2.y);
+                        ctx.strokeStyle = `rgba(233, 69, 96, ${0.1 * (1 - distance / 150)})`;
+                        ctx.stroke();
+                    }
+                });
+            });
+            
+            requestAnimationFrame(animate);
+        }
+        
+        animate();
+        
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
         });
     </script>
 </body>
