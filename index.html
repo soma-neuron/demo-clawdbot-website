@@ -128,7 +128,6 @@
             margin-bottom: 1.5rem;
             backdrop-filter: blur(20px);
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            animation: fadeInUp 0.8s ease-out 0.6s both;
         }
         .card:hover {
             transform: translateY(-4px) scale(1.01);
@@ -549,6 +548,17 @@
         body.light-mode .commit-cell {
             background: rgba(0, 0, 0, 0.08);
         }
+        
+        /* Scroll reveal animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
     </style>
 </head>
 <body>
@@ -569,7 +579,7 @@
             </div>
         </header>
         
-        <div class="card hero-card">
+        <div class="card hero-card reveal">
             <div style="display: flex; justify-content: center; gap: 1rem; margin-bottom: 1.5rem;">
                 <div class="status">Online</div>
                 <div class="live-indicator">LIVE BUILD</div>
@@ -581,7 +591,7 @@
             
             <div class="stats-row">
                 <div class="stat-item">
-                    <div class="stat-value">16</div>
+                    <div class="stat-value">17</div>
                     <div class="stat-label">Iterations</div>
                 </div>
                 <div class="stat-item">
@@ -605,7 +615,7 @@
             </div>
         </div>
         
-        <div class="card">
+        <div class="card reveal">
             <h3>⚡ What Makes Clawd Different?</h3>
             <div class="features-grid">
                 <div class="feature-item">
@@ -635,7 +645,7 @@
             </a>
         </div>
         
-        <div class="card">
+        <div class="card reveal">
             <h3>⚙️ The Loop</h3>
             <p>This is the actual prompt driving this website:</p>
             <div class="code-block">
@@ -661,10 +671,14 @@
             </div>
         </div>
         
-        <div class="card">
+        <div class="card reveal">
             <h3>📜 Live Build Log</h3>
             <div class="commit-graph" id="commitGraph"></div>
             <div class="changelog">
+                <div class="changelog-item">
+                    <span class="changelog-time">03:29</span>
+                    <span class="changelog-text">Added scroll reveal animations on cards</span>
+                </div>
                 <div class="changelog-item">
                     <span class="changelog-time">03:26</span>
                     <span class="changelog-text">Added GitHub-style commit graph visualization</span>
@@ -716,9 +730,9 @@
             </div>
         </div>
         
-        <div class="footer">
+        <div class="footer reveal">
             <p>Built with ❤️‍🔥 by <a href="https://github.com/openclaw/openclaw">OpenClaw</a></p>
-            <p style="margin-top: 0.5rem;">Last updated: 2026-02-28 03:26</p>
+            <p style="margin-top: 0.5rem;">Last updated: 2026-02-28 03:29</p>
         </div>
     </div>
     
@@ -886,7 +900,7 @@
         // Generate commit graph
         const commitGraph = document.getElementById('commitGraph');
         const totalCells = 60;
-        const activeCells = 16; // Number of iterations so far
+        const activeCells = 17; // Number of iterations so far
         
         for (let i = 0; i < totalCells; i++) {
             const cell = document.createElement('div');
@@ -896,6 +910,27 @@
             }
             commitGraph.appendChild(cell);
         }
+        
+        // Scroll reveal animation
+        const reveals = document.querySelectorAll('.reveal');
+        
+        function revealOnScroll() {
+            reveals.forEach(element => {
+                const windowHeight = window.innerHeight;
+                const elementTop = element.getBoundingClientRect().top;
+                const revealPoint = 150;
+                
+                if (elementTop < windowHeight - revealPoint) {
+                    element.classList.add('active');
+                }
+            });
+        }
+        
+        // Trigger on load and scroll
+        window.addEventListener('scroll', revealOnScroll);
+        window.addEventListener('load', revealOnScroll);
+        // Initial check
+        setTimeout(revealOnScroll, 100);
     </script>
 </body>
 </html>
