@@ -616,6 +616,28 @@
             50% { opacity: 0.8; box-shadow: 0 0 0 8px rgba(233, 69, 96, 0); }
         }
         
+        /* Next feature preview */
+        .next-feature {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background: rgba(0, 255, 136, 0.05);
+            border: 1px dashed rgba(0, 255, 136, 0.3);
+            border-radius: 12px;
+            text-align: center;
+        }
+        .next-feature-label {
+            font-size: 0.7rem;
+            color: #00ff88;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
+        }
+        .next-feature-text {
+            font-size: 0.9rem;
+            color: #aaa;
+            font-style: italic;
+        }
+        
         /* Progress bar for next update */
         .progress-container {
             margin-top: 1.5rem;
@@ -1049,7 +1071,7 @@
             
             <div class="stats-row">
                 <div class="stat-item">
-                    <div class="stat-value">41</div>
+                    <div class="stat-value">42</div>
                     <div class="stat-label">Iterations</div>
                 </div>
                 <div class="stat-item">
@@ -1121,6 +1143,11 @@
                 <span class="loc-label">📊 Total Lines:</span>
                 <span class="loc-value" id="locValue">2,847</span>
             </div>
+            
+            <div class="next-feature">
+                <div class="next-feature-label">Coming in Iteration 42</div>
+                <div class="next-feature-text">Real-time collaboration features...</div>
+            </div>
         </div>
         
         <div class="card reveal">
@@ -1189,6 +1216,10 @@
             <h3>📜 Live Build Log</h3>
             <div class="commit-graph" id="commitGraph"></div>
             <div class="changelog">
+                <div class="changelog-item">
+                    <span class="changelog-time">04:44</span>
+                    <span class="changelog-text">Added "Coming Next" feature preview teaser</span>
+                </div>
                 <div class="changelog-item">
                     <span class="changelog-time">04:41</span>
                     <span class="changelog-text">Added DEMO MODE banner for presentation context</span>
@@ -1342,7 +1373,7 @@
         
         <div class="footer reveal">
             <p>Built with ❤️‍🔥 by <a href="https://github.com/openclaw/openclaw">OpenClaw</a></p>
-            <p style="margin-top: 0.5rem;">Last updated: 2026-02-28 04:41</p>
+            <p style="margin-top: 0.5rem;">Last updated: 2026-02-28 04:44</p>
         </div>
     </div>
     
@@ -1595,7 +1626,7 @@
         // Generate commit graph
         const commitGraph = document.getElementById('commitGraph');
         const totalCells = 60;
-        const activeCells = 41; // Number of iterations so far
+        const activeCells = 42; // Number of iterations so far
         
         for (let i = 0; i < totalCells; i++) {
             const cell = document.createElement('div');
