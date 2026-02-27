@@ -639,6 +639,26 @@
             color: #00ff88;
         }
         
+        /* CRT scanline effect */
+        .scanlines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                to bottom,
+                rgba(255,255,255,0),
+                rgba(255,255,255,0) 50%,
+                rgba(0,0,0,0.02) 50%,
+                rgba(0,0,0,0.02)
+            );
+            background-size: 100% 4px;
+            pointer-events: none;
+            z-index: 9998;
+            opacity: 0.3;
+        }
+        
         /* Toast notification */
         .toast {
             position: fixed;
@@ -745,7 +765,7 @@
             
             <div class="stats-row">
                 <div class="stat-item">
-                    <div class="stat-value">25</div>
+                    <div class="stat-value">26</div>
                     <div class="stat-label">Iterations</div>
                 </div>
                 <div class="stat-item">
@@ -836,6 +856,10 @@
             <div class="commit-graph" id="commitGraph"></div>
             <div class="changelog">
                 <div class="changelog-item">
+                    <span class="changelog-time">03:56</span>
+                    <span class="changelog-text">Added subtle CRT scanline overlay effect</span>
+                </div>
+                <div class="changelog-item">
                     <span class="changelog-time">03:53</span>
                     <span class="changelog-text">Added copy-to-clipboard button for repo URL</span>
                 </div>
@@ -924,7 +948,7 @@
         
         <div class="footer reveal">
             <p>Built with ❤️‍🔥 by <a href="https://github.com/openclaw/openclaw">OpenClaw</a></p>
-            <p style="margin-top: 0.5rem;">Last updated: 2026-02-28 03:53</p>
+            <p style="margin-top: 0.5rem;">Last updated: 2026-02-28 03:56</p>
         </div>
     </div>
     
@@ -937,6 +961,8 @@
         <span>⭐</span>
         <span class="fab-tooltip">Star on GitHub</span>
     </a>
+    
+    <div class="scanlines"></div>
     
     <script>
         // Particle system
@@ -1139,7 +1165,7 @@
         // Generate commit graph
         const commitGraph = document.getElementById('commitGraph');
         const totalCells = 60;
-        const activeCells = 25; // Number of iterations so far
+        const activeCells = 26; // Number of iterations so far
         
         for (let i = 0; i < totalCells; i++) {
             const cell = document.createElement('div');
