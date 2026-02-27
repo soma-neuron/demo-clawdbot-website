@@ -780,7 +780,7 @@
             
             <div class="stats-row">
                 <div class="stat-item">
-                    <div class="stat-value">27</div>
+                    <div class="stat-value">28</div>
                     <div class="stat-label">Iterations</div>
                 </div>
                 <div class="stat-item">
@@ -870,6 +870,10 @@
             <h3>📜 Live Build Log</h3>
             <div class="commit-graph" id="commitGraph"></div>
             <div class="changelog">
+                <div class="changelog-item">
+                    <span class="changelog-time">04:02</span>
+                    <span class="changelog-text">Added cursor trail effect following mouse movement</span>
+                </div>
                 <div class="changelog-item">
                     <span class="changelog-time">03:59</span>
                     <span class="changelog-text">Added vignette effect to focus attention on content</span>
@@ -967,7 +971,7 @@
         
         <div class="footer reveal">
             <p>Built with ❤️‍🔥 by <a href="https://github.com/openclaw/openclaw">OpenClaw</a></p>
-            <p style="margin-top: 0.5rem;">Last updated: 2026-02-28 03:59</p>
+            <p style="margin-top: 0.5rem;">Last updated: 2026-02-28 04:02</p>
         </div>
     </div>
     
@@ -1185,7 +1189,7 @@
         // Generate commit graph
         const commitGraph = document.getElementById('commitGraph');
         const totalCells = 60;
-        const activeCells = 27; // Number of iterations so far
+        const activeCells = 28; // Number of iterations so far
         
         for (let i = 0; i < totalCells; i++) {
             const cell = document.createElement('div');
@@ -1269,6 +1273,43 @@
         
         // Show toast on load (simulating a recent update)
         setTimeout(showUpdateToast, 2000);
+        
+        // Cursor trail effect
+        const cursorTrail = [];
+        const maxTrailLength = 20;
+        
+        document.addEventListener('mousemove', (e) => {
+            cursorTrail.push({ x: e.clientX, y: e.clientY, age: 0 });
+            if (cursorTrail.length > maxTrailLength) {
+                cursorTrail.shift();
+            }
+        });
+        
+        function drawCursorTrail() {
+            cursorTrail.forEach((point, index) => {
+                point.age++;
+                const opacity = 1 - (point.age / maxTrailLength);
+                const size = (index / cursorTrail.length) * 6;
+                
+                const dot = document.createElement('div');
+                dot.style.position = 'fixed';
+                dot.style.left = point.x + 'px';
+                dot.style.top = point.y + 'px';
+                dot.style.width = size + 'px';
+                dot.style.height = size + 'px';
+                dot.style.background = `rgba(233, 69, 96, ${opacity * 0.5})`;
+                dot.style.borderRadius = '50%';
+                dot.style.pointerEvents = 'none';
+                dot.style.zIndex = '9996';
+                dot.style.transform = 'translate(-50%, -50%)';
+                document.body.appendChild(dot);
+                
+                setTimeout(() => dot.remove(), 50);
+            });
+            
+            requestAnimationFrame(drawCursorTrail);
+        }
+        drawCursorTrail();
         
         // Copy repo URL function
         function copyRepoUrl() {
