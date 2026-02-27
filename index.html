@@ -690,6 +690,75 @@
             transform: translateY(0);
         }
         
+        /* Help modal */
+        .help-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10001;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+        }
+        .help-modal.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        .help-content {
+            background: rgba(20, 20, 30, 0.95);
+            border: 1px solid rgba(233, 69, 96, 0.3);
+            border-radius: 16px;
+            padding: 2rem;
+            max-width: 400px;
+            width: 90%;
+            backdrop-filter: blur(20px);
+        }
+        .help-content h3 {
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        .help-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .help-item:last-child {
+            border-bottom: none;
+        }
+        .help-key {
+            background: rgba(233, 69, 96, 0.2);
+            color: #e94560;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 0.85rem;
+        }
+        .help-desc {
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        .help-close {
+            margin-top: 1.5rem;
+            width: 100%;
+            background: rgba(233, 69, 96, 0.2);
+            border: 1px solid rgba(233, 69, 96, 0.3);
+            color: #e94560;
+            padding: 0.75rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .help-close:hover {
+            background: rgba(233, 69, 96, 0.3);
+        }
+        
         /* Sound wave visualizer */
         .sound-wave {
             display: flex;
@@ -829,7 +898,7 @@
             
             <div class="stats-row">
                 <div class="stat-item">
-                    <div class="stat-value">31</div>
+                    <div class="stat-value">32</div>
                     <div class="stat-label">Iterations</div>
                 </div>
                 <div class="stat-item">
@@ -910,7 +979,7 @@
             <button class="demo-button" onclick="runDemo()">
                 ▶ Simulate One Iteration (or press 'C')
             </button>
-            <p style="font-size: 0.75rem; color: #666; margin-top: 0.5rem;">Press 'M' for Matrix mode • Konami code for surprise</p>
+            <p style="font-size: 0.75rem; color: #666; margin-top: 0.5rem;">Press 'M' for Matrix mode • Press '?' for help • Konami code for surprise</p>
             
             <button class="copy-btn" id="copyBtn" onclick="copyRepoUrl()">
                 📋 Copy repo URL
@@ -931,6 +1000,10 @@
             <h3>📜 Live Build Log</h3>
             <div class="commit-graph" id="commitGraph"></div>
             <div class="changelog">
+                <div class="changelog-item">
+                    <span class="changelog-time">04:14</span>
+                    <span class="changelog-text">Added keyboard shortcuts help modal (press ?)</span>
+                </div>
                 <div class="changelog-item">
                     <span class="changelog-time">04:11</span>
                     <span class="changelog-text">Added milestone celebration banner</span>
@@ -1044,7 +1117,7 @@
         
         <div class="footer reveal">
             <p>Built with ❤️‍🔥 by <a href="https://github.com/openclaw/openclaw">OpenClaw</a></p>
-            <p style="margin-top: 0.5rem;">Last updated: 2026-02-28 04:11</p>
+            <p style="margin-top: 0.5rem;">Last updated: 2026-02-28 04:14</p>
         </div>
     </div>
     
@@ -1060,6 +1133,29 @@
     
     <div class="scanlines"></div>
     <div class="vignette"></div>
+    
+    <div class="help-modal" id="helpModal" onclick="toggleHelp(false)">
+        <div class="help-content" onclick="event.stopPropagation()">
+            <h3>⌨️ Keyboard Shortcuts</h3>
+            <div class="help-item">
+                <span class="help-key">C</span>
+                <span class="help-desc">Simulate iteration</span>
+            </div>
+            <div class="help-item">
+                <span class="help-key">M</span>
+                <span class="help-desc">Toggle Matrix mode</span>
+            </div>
+            <div class="help-item">
+                <span class="help-key">?</span>
+                <span class="help-desc">Toggle this help</span>
+            </div>
+            <div class="help-item">
+                <span class="help-key">↑↑↓↓←→←→BA</span>
+                <span class="help-desc">Easter egg</span>
+            </div>
+            <button class="help-close" onclick="toggleHelp(false)">Close</button>
+        </div>
+    </div>
     
     <script>
         // Particle system
@@ -1195,6 +1291,18 @@
             }
         });
         
+        // Help modal toggle
+        function toggleHelp(show) {
+            document.getElementById('helpModal').classList.toggle('show', show);
+        }
+        
+        document.addEventListener('keydown', (e) => {
+            if (e.key === '?') {
+                const modal = document.getElementById('helpModal');
+                toggleHelp(!modal.classList.contains('show'));
+            }
+        });
+        
         // Easter egg: Konami code triggers particle explosion
         let konami = [];
         const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
@@ -1262,7 +1370,7 @@
         // Generate commit graph
         const commitGraph = document.getElementById('commitGraph');
         const totalCells = 60;
-        const activeCells = 31; // Number of iterations so far
+        const activeCells = 32; // Number of iterations so far
         
         for (let i = 0; i < totalCells; i++) {
             const cell = document.createElement('div');
