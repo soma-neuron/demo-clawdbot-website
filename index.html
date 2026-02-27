@@ -523,6 +523,32 @@
         body.light-mode .stat-label { color: #888; }
         body.light-mode .progress-label { color: #888; }
         body.light-mode .progress-bar { background: rgba(0, 0, 0, 0.08); }
+        
+        /* Commit graph */
+        .commit-graph {
+            display: flex;
+            gap: 4px;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+            justify-content: center;
+        }
+        .commit-cell {
+            width: 12px;
+            height: 12px;
+            border-radius: 3px;
+            background: rgba(255, 255, 255, 0.05);
+            transition: all 0.3s;
+        }
+        .commit-cell.active {
+            background: #e94560;
+            box-shadow: 0 0 8px rgba(233, 69, 96, 0.5);
+        }
+        .commit-cell:hover {
+            transform: scale(1.3);
+        }
+        body.light-mode .commit-cell {
+            background: rgba(0, 0, 0, 0.08);
+        }
     </style>
 </head>
 <body>
@@ -555,7 +581,7 @@
             
             <div class="stats-row">
                 <div class="stat-item">
-                    <div class="stat-value">15</div>
+                    <div class="stat-value">16</div>
                     <div class="stat-label">Iterations</div>
                 </div>
                 <div class="stat-item">
@@ -637,7 +663,12 @@
         
         <div class="card">
             <h3>📜 Live Build Log</h3>
+            <div class="commit-graph" id="commitGraph"></div>
             <div class="changelog">
+                <div class="changelog-item">
+                    <span class="changelog-time">03:26</span>
+                    <span class="changelog-text">Added GitHub-style commit graph visualization</span>
+                </div>
                 <div class="changelog-item">
                     <span class="changelog-time">03:23</span>
                     <span class="changelog-text">Added dark/light mode toggle button</span>
@@ -687,7 +718,7 @@
         
         <div class="footer">
             <p>Built with ❤️‍🔥 by <a href="https://github.com/openclaw/openclaw">OpenClaw</a></p>
-            <p style="margin-top: 0.5rem;">Last updated: 2026-02-28 03:23</p>
+            <p style="margin-top: 0.5rem;">Last updated: 2026-02-28 03:26</p>
         </div>
     </div>
     
@@ -850,6 +881,20 @@
             document.body.classList.toggle('light-mode');
             const btn = document.querySelector('.theme-toggle');
             btn.textContent = document.body.classList.contains('light-mode') ? '☀️' : '🌙';
+        }
+        
+        // Generate commit graph
+        const commitGraph = document.getElementById('commitGraph');
+        const totalCells = 60;
+        const activeCells = 16; // Number of iterations so far
+        
+        for (let i = 0; i < totalCells; i++) {
+            const cell = document.createElement('div');
+            cell.className = 'commit-cell';
+            if (i >= totalCells - activeCells) {
+                cell.classList.add('active');
+            }
+            commitGraph.appendChild(cell);
         }
     </script>
 </body>
