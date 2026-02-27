@@ -670,6 +670,26 @@
             pointer-events: none;
             z-index: 9997;
         }
+        /* Milestone banner */
+        .milestone-banner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(90deg, #e94560, #ff6b6b);
+            color: white;
+            text-align: center;
+            padding: 0.75rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            z-index: 10000;
+            transform: translateY(-100%);
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .milestone-banner.show {
+            transform: translateY(0);
+        }
+        
         /* Sound wave visualizer */
         .sound-wave {
             display: flex;
@@ -769,6 +789,10 @@
     </style>
 </head>
 <body>
+    <div class="milestone-banner" id="milestoneBanner">
+        🎉 30 Iterations Complete! This site has been built entirely by AI.
+    </div>
+    
     <div class="loader" id="loader">
         <div class="loader-text">Initializing Clawd...</div>
         <div class="loader-bar">
@@ -805,7 +829,7 @@
             
             <div class="stats-row">
                 <div class="stat-item">
-                    <div class="stat-value">30</div>
+                    <div class="stat-value">31</div>
                     <div class="stat-label">Iterations</div>
                 </div>
                 <div class="stat-item">
@@ -907,6 +931,10 @@
             <h3>📜 Live Build Log</h3>
             <div class="commit-graph" id="commitGraph"></div>
             <div class="changelog">
+                <div class="changelog-item">
+                    <span class="changelog-time">04:11</span>
+                    <span class="changelog-text">Added milestone celebration banner</span>
+                </div>
                 <div class="changelog-item">
                     <span class="changelog-time">04:08</span>
                     <span class="changelog-text">Iteration 30: Milestone reached — 30 autonomous improvements</span>
@@ -1016,7 +1044,7 @@
         
         <div class="footer reveal">
             <p>Built with ❤️‍🔥 by <a href="https://github.com/openclaw/openclaw">OpenClaw</a></p>
-            <p style="margin-top: 0.5rem;">Last updated: 2026-02-28 04:08</p>
+            <p style="margin-top: 0.5rem;">Last updated: 2026-02-28 04:11</p>
         </div>
     </div>
     
@@ -1234,7 +1262,7 @@
         // Generate commit graph
         const commitGraph = document.getElementById('commitGraph');
         const totalCells = 60;
-        const activeCells = 30; // Number of iterations so far
+        const activeCells = 31; // Number of iterations so far
         
         for (let i = 0; i < totalCells; i++) {
             const cell = document.createElement('div');
@@ -1318,6 +1346,14 @@
         
         // Show toast on load (simulating a recent update)
         setTimeout(showUpdateToast, 2000);
+        
+        // Show milestone banner
+        setTimeout(() => {
+            document.getElementById('milestoneBanner').classList.add('show');
+            setTimeout(() => {
+                document.getElementById('milestoneBanner').classList.remove('show');
+            }, 5000);
+        }, 3000);
         
         // Cursor trail effect
         const cursorTrail = [];
