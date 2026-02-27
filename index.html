@@ -327,6 +327,43 @@
         }
         .changelog-text { color: #888; }
         
+        /* Interactive demo button */
+        .demo-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: transparent;
+            color: #e94560;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border: 2px solid #e94560;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 1rem;
+        }
+        .demo-button:hover {
+            background: #e94560;
+            color: white;
+            box-shadow: 0 0 30px rgba(233, 69, 96, 0.5);
+        }
+        .demo-output {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: rgba(0, 255, 136, 0.05);
+            border: 1px solid rgba(0, 255, 136, 0.2);
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 0.8rem;
+            color: #00ff88;
+            display: none;
+        }
+        .demo-output.active {
+            display: block;
+            animation: fadeIn 0.3s ease-out;
+        }
+        
         .footer {
             text-align: center;
             margin-top: 3rem;
@@ -399,7 +436,7 @@
             
             <div class="stats-row">
                 <div class="stat-item">
-                    <div class="stat-value">9</div>
+                    <div class="stat-value">10</div>
                     <div class="stat-label">Iterations</div>
                 </div>
                 <div class="stat-item">
@@ -464,11 +501,28 @@
                 <span class="keyword">push</span> → <br>
                 <span class="keyword">deploy</span>
             </div>
+            
+            <button class="demo-button" onclick="runDemo()">
+                ▶ Simulate One Iteration
+            </button>
+            <div class="demo-output" id="demoOutput">
+                <div>→ Reading index.html...</div>
+                <div>→ Analyzing structure...</div>
+                <div>→ Generating improvements...</div>
+                <div>→ Writing changes...</div>
+                <div>→ Committing: "Iteration 11: Added interactive demo button"</div>
+                <div>→ Pushing to origin/main...</div>
+                <div style="color: #00ff88; margin-top: 0.5rem;">✓ Deployed successfully!</div>
+            </div>
         </div>
         
         <div class="card">
             <h3>📜 Live Build Log</h3>
             <div class="changelog">
+                <div class="changelog-item">
+                    <span class="changelog-time">03:10</span>
+                    <span class="changelog-text">Added interactive "Simulate Iteration" button with animated output</span>
+                </div>
                 <div class="changelog-item">
                     <span class="changelog-time">03:08</span>
                     <span class="changelog-text">Major redesign: particle background, animated gradients, progress bar</span>
@@ -494,7 +548,7 @@
         
         <div class="footer">
             <p>Built with ❤️‍🔥 by <a href="https://github.com/openclaw/openclaw">OpenClaw</a></p>
-            <p style="margin-top: 0.5rem;">Last updated: 2026-02-28 03:08</p>
+            <p style="margin-top: 0.5rem;">Last updated: 2026-02-28 03:10</p>
         </div>
     </div>
     
@@ -572,6 +626,21 @@
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
         });
+        
+        // Demo simulation
+        function runDemo() {
+            const output = document.getElementById('demoOutput');
+            output.classList.add('active');
+            
+            const lines = output.querySelectorAll('div');
+            lines.forEach((line, i) => {
+                line.style.opacity = '0';
+                setTimeout(() => {
+                    line.style.transition = 'opacity 0.2s';
+                    line.style.opacity = '1';
+                }, i * 200);
+            });
+        }
     </script>
 </body>
 </html>
