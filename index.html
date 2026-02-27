@@ -670,8 +670,33 @@
             pointer-events: none;
             z-index: 9997;
         }
-        body.light-mode .vignette {
-            background: radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,0.1) 100%);
+        /* Sound wave visualizer */
+        .sound-wave {
+            display: flex;
+            gap: 3px;
+            justify-content: center;
+            margin-top: 1.5rem;
+            height: 30px;
+            align-items: flex-end;
+        }
+        .wave-bar {
+            width: 4px;
+            background: linear-gradient(to top, #e94560, #ff6b6b);
+            border-radius: 2px;
+            animation: wave 1s ease-in-out infinite;
+        }
+        .wave-bar:nth-child(1) { animation-delay: 0s; height: 20%; }
+        .wave-bar:nth-child(2) { animation-delay: 0.1s; height: 40%; }
+        .wave-bar:nth-child(3) { animation-delay: 0.2s; height: 60%; }
+        .wave-bar:nth-child(4) { animation-delay: 0.3s; height: 80%; }
+        .wave-bar:nth-child(5) { animation-delay: 0.4s; height: 100%; }
+        .wave-bar:nth-child(6) { animation-delay: 0.5s; height: 80%; }
+        .wave-bar:nth-child(7) { animation-delay: 0.6s; height: 60%; }
+        .wave-bar:nth-child(8) { animation-delay: 0.7s; height: 40%; }
+        .wave-bar:nth-child(9) { animation-delay: 0.8s; height: 20%; }
+        @keyframes wave {
+            0%, 100% { transform: scaleY(0.5); opacity: 0.5; }
+            50% { transform: scaleY(1); opacity: 1; }
         }
         
         /* Toast notification */
@@ -780,7 +805,7 @@
             
             <div class="stats-row">
                 <div class="stat-item">
-                    <div class="stat-value">28</div>
+                    <div class="stat-value">29</div>
                     <div class="stat-label">Iterations</div>
                 </div>
                 <div class="stat-item">
@@ -801,6 +826,18 @@
                 <div class="progress-bar">
                     <div class="progress-fill"></div>
                 </div>
+            </div>
+            
+            <div class="sound-wave">
+                <div class="wave-bar"></div>
+                <div class="wave-bar"></div>
+                <div class="wave-bar"></div>
+                <div class="wave-bar"></div>
+                <div class="wave-bar"></div>
+                <div class="wave-bar"></div>
+                <div class="wave-bar"></div>
+                <div class="wave-bar"></div>
+                <div class="wave-bar"></div>
             </div>
         </div>
         
@@ -870,6 +907,10 @@
             <h3>📜 Live Build Log</h3>
             <div class="commit-graph" id="commitGraph"></div>
             <div class="changelog">
+                <div class="changelog-item">
+                    <span class="changelog-time">04:05</span>
+                    <span class="changelog-text">Added sound wave visualizer animation</span>
+                </div>
                 <div class="changelog-item">
                     <span class="changelog-time">04:02</span>
                     <span class="changelog-text">Added cursor trail effect following mouse movement</span>
@@ -971,7 +1012,7 @@
         
         <div class="footer reveal">
             <p>Built with ❤️‍🔥 by <a href="https://github.com/openclaw/openclaw">OpenClaw</a></p>
-            <p style="margin-top: 0.5rem;">Last updated: 2026-02-28 04:02</p>
+            <p style="margin-top: 0.5rem;">Last updated: 2026-02-28 04:05</p>
         </div>
     </div>
     
@@ -1189,7 +1230,7 @@
         // Generate commit graph
         const commitGraph = document.getElementById('commitGraph');
         const totalCells = 60;
-        const activeCells = 28; // Number of iterations so far
+        const activeCells = 29; // Number of iterations so far
         
         for (let i = 0; i < totalCells; i++) {
             const cell = document.createElement('div');
