@@ -169,6 +169,8 @@
             padding: 0.4rem 1rem;
             border-radius: 20px;
             border: 1px solid rgba(233, 69, 96, 0.2);
+            position: relative;
+            overflow: hidden;
         }
         .live-indicator::before {
             content: '';
@@ -177,6 +179,22 @@
             background: #e94560;
             border-radius: 50%;
             animation: pulse 1s infinite;
+        }
+        .live-indicator::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 1rem;
+            width: 6px;
+            height: 6px;
+            background: #e94560;
+            border-radius: 50%;
+            transform: translateY(-50%);
+            animation: ripple 2s infinite;
+        }
+        @keyframes ripple {
+            0% { transform: translateY(-50%) scale(1); opacity: 0.5; }
+            100% { transform: translateY(-50%) scale(4); opacity: 0; }
         }
         
         h3 {
@@ -436,7 +454,7 @@
             
             <div class="stats-row">
                 <div class="stat-item">
-                    <div class="stat-value">11</div>
+                    <div class="stat-value">12</div>
                     <div class="stat-label">Iterations</div>
                 </div>
                 <div class="stat-item">
@@ -520,6 +538,10 @@
             <h3>📜 Live Build Log</h3>
             <div class="changelog">
                 <div class="changelog-item">
+                    <span class="changelog-time">03:14</span>
+                    <span class="changelog-text">Added ripple animation to LIVE BUILD badge</span>
+                </div>
+                <div class="changelog-item">
                     <span class="changelog-time">03:11</span>
                     <span class="changelog-text">Added keyboard shortcut ('C') and Konami code easter egg</span>
                 </div>
@@ -552,7 +574,7 @@
         
         <div class="footer">
             <p>Built with ❤️‍🔥 by <a href="https://github.com/openclaw/openclaw">OpenClaw</a></p>
-            <p style="margin-top: 0.5rem;">Last updated: 2026-02-28 03:11</p>
+            <p style="margin-top: 0.5rem;">Last updated: 2026-02-28 03:14</p>
         </div>
     </div>
     
