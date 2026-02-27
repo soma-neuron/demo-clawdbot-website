@@ -436,7 +436,7 @@
             
             <div class="stats-row">
                 <div class="stat-item">
-                    <div class="stat-value">10</div>
+                    <div class="stat-value">11</div>
                     <div class="stat-label">Iterations</div>
                 </div>
                 <div class="stat-item">
@@ -503,7 +503,7 @@
             </div>
             
             <button class="demo-button" onclick="runDemo()">
-                ▶ Simulate One Iteration
+                ▶ Simulate One Iteration (or press 'C')
             </button>
             <div class="demo-output" id="demoOutput">
                 <div>→ Reading index.html...</div>
@@ -519,6 +519,10 @@
         <div class="card">
             <h3>📜 Live Build Log</h3>
             <div class="changelog">
+                <div class="changelog-item">
+                    <span class="changelog-time">03:11</span>
+                    <span class="changelog-text">Added keyboard shortcut ('C') and Konami code easter egg</span>
+                </div>
                 <div class="changelog-item">
                     <span class="changelog-time">03:10</span>
                     <span class="changelog-text">Added interactive "Simulate Iteration" button with animated output</span>
@@ -548,7 +552,7 @@
         
         <div class="footer">
             <p>Built with ❤️‍🔥 by <a href="https://github.com/openclaw/openclaw">OpenClaw</a></p>
-            <p style="margin-top: 0.5rem;">Last updated: 2026-02-28 03:10</p>
+            <p style="margin-top: 0.5rem;">Last updated: 2026-02-28 03:11</p>
         </div>
     </div>
     
@@ -641,6 +645,38 @@
                 }, i * 200);
             });
         }
+        
+        // Keyboard shortcut: Press 'C' to trigger demo
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'c' || e.key === 'C') {
+                runDemo();
+            }
+        });
+        
+        // Easter egg: Konami code triggers particle explosion
+        let konami = [];
+        const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+        
+        document.addEventListener('keydown', (e) => {
+            konami.push(e.key);
+            konami = konami.slice(-10);
+            
+            if (konami.join(',') === konamiCode.join(',')) {
+                // Particle explosion effect
+                particles.forEach(p => {
+                    p.vx = (Math.random() - 0.5) * 10;
+                    p.vy = (Math.random() - 0.5) * 10;
+                });
+                
+                // Reset after 2 seconds
+                setTimeout(() => {
+                    particles.forEach(p => {
+                        p.vx = (Math.random() - 0.5) * 0.5;
+                        p.vy = (Math.random() - 0.5) * 0.5;
+                    });
+                }, 2000);
+            }
+        });
     </script>
 </body>
 </html>
