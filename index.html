@@ -612,6 +612,33 @@
             transform: translateX(0);
         }
         
+        /* Copy button */
+        .copy-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 0.5rem 1rem;
+            color: #aaa;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .copy-btn:hover {
+            background: rgba(233, 69, 96, 0.1);
+            border-color: rgba(233, 69, 96, 0.3);
+            color: #e94560;
+        }
+        .copy-btn.copied {
+            background: rgba(0, 255, 136, 0.1);
+            border-color: rgba(0, 255, 136, 0.3);
+            color: #00ff88;
+        }
+        
         /* Toast notification */
         .toast {
             position: fixed;
@@ -718,7 +745,7 @@
             
             <div class="stats-row">
                 <div class="stat-item">
-                    <div class="stat-value">24</div>
+                    <div class="stat-value">25</div>
                     <div class="stat-label">Iterations</div>
                 </div>
                 <div class="stat-item">
@@ -788,6 +815,11 @@
                 ▶ Simulate One Iteration (or press 'C')
             </button>
             <p style="font-size: 0.75rem; color: #666; margin-top: 0.5rem;">Press 'M' for Matrix mode • Konami code for surprise</p>
+            
+            <button class="copy-btn" id="copyBtn" onclick="copyRepoUrl()">
+                📋 Copy repo URL
+            </button>
+            
             <div class="demo-output" id="demoOutput">
                 <div>→ Reading index.html...</div>
                 <div>→ Analyzing structure...</div>
@@ -803,6 +835,10 @@
             <h3>📜 Live Build Log</h3>
             <div class="commit-graph" id="commitGraph"></div>
             <div class="changelog">
+                <div class="changelog-item">
+                    <span class="changelog-time">03:53</span>
+                    <span class="changelog-text">Added copy-to-clipboard button for repo URL</span>
+                </div>
                 <div class="changelog-item">
                     <span class="changelog-time">03:50</span>
                     <span class="changelog-text">Added breathing glow animation to hero card</span>
@@ -888,7 +924,7 @@
         
         <div class="footer reveal">
             <p>Built with ❤️‍🔥 by <a href="https://github.com/openclaw/openclaw">OpenClaw</a></p>
-            <p style="margin-top: 0.5rem;">Last updated: 2026-02-28 03:50</p>
+            <p style="margin-top: 0.5rem;">Last updated: 2026-02-28 03:53</p>
         </div>
     </div>
     
@@ -1103,7 +1139,7 @@
         // Generate commit graph
         const commitGraph = document.getElementById('commitGraph');
         const totalCells = 60;
-        const activeCells = 24; // Number of iterations so far
+        const activeCells = 25; // Number of iterations so far
         
         for (let i = 0; i < totalCells; i++) {
             const cell = document.createElement('div');
@@ -1187,6 +1223,21 @@
         
         // Show toast on load (simulating a recent update)
         setTimeout(showUpdateToast, 2000);
+        
+        // Copy repo URL function
+        function copyRepoUrl() {
+            const url = 'https://github.com/openclaw/openclaw';
+            navigator.clipboard.writeText(url).then(() => {
+                const btn = document.getElementById('copyBtn');
+                const originalText = btn.innerHTML;
+                btn.innerHTML = '✓ Copied!';
+                btn.classList.add('copied');
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                    btn.classList.remove('copied');
+                }, 2000);
+            });
+        }
         
         // Hide loader after animation
         setTimeout(() => {
