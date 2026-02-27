@@ -898,7 +898,7 @@
             
             <div class="stats-row">
                 <div class="stat-item">
-                    <div class="stat-value">33</div>
+                    <div class="stat-value">34</div>
                     <div class="stat-label">Iterations</div>
                 </div>
                 <div class="stat-item">
@@ -1000,6 +1000,10 @@
             <h3>📜 Live Build Log</h3>
             <div class="commit-graph" id="commitGraph"></div>
             <div class="changelog">
+                <div class="changelog-item">
+                    <span class="changelog-time">04:20</span>
+                    <span class="changelog-text">Added dynamic favicon with heart and fire emoji</span>
+                </div>
                 <div class="changelog-item">
                     <span class="changelog-time">04:17</span>
                     <span class="changelog-text">Added dynamic page title showing iteration count</span>
@@ -1121,7 +1125,7 @@
         
         <div class="footer reveal">
             <p>Built with ❤️‍🔥 by <a href="https://github.com/openclaw/openclaw">OpenClaw</a></p>
-            <p style="margin-top: 0.5rem;">Last updated: 2026-02-28 04:17</p>
+            <p style="margin-top: 0.5rem;">Last updated: 2026-02-28 04:20</p>
         </div>
     </div>
     
@@ -1374,7 +1378,7 @@
         // Generate commit graph
         const commitGraph = document.getElementById('commitGraph');
         const totalCells = 60;
-        const activeCells = 33; // Number of iterations so far
+        const activeCells = 34; // Number of iterations so far
         
         for (let i = 0; i < totalCells; i++) {
             const cell = document.createElement('div');
@@ -1460,7 +1464,37 @@
         setTimeout(showUpdateToast, 2000);
         
         // Update page title with iteration count
-        document.title = `Clawd — ${33} Iterations of AI Evolution`;
+        document.title = `Clawd — ${34} Iterations of AI Evolution`;
+        
+        // Dynamic favicon with iteration count
+        function updateFavicon() {
+            const canvas = document.createElement('canvas');
+            canvas.width = 32;
+            canvas.height = 32;
+            const ctx = canvas.getContext('2d');
+            
+            // Background
+            ctx.fillStyle = '#0a0a0f';
+            ctx.fillRect(0, 0, 32, 32);
+            
+            // Heart
+            ctx.fillStyle = '#e94560';
+            ctx.font = 'bold 20px Arial';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('❤️', 16, 14);
+            
+            // Fire
+            ctx.fillStyle = '#ff6b6b';
+            ctx.font = '12px Arial';
+            ctx.fillText('🔥', 22, 22);
+            
+            const link = document.querySelector('link[rel="icon"]') || document.createElement('link');
+            link.rel = 'icon';
+            link.href = canvas.toDataURL();
+            document.head.appendChild(link);
+        }
+        updateFavicon();
         
         // Show milestone banner
         setTimeout(() => {
