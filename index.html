@@ -313,6 +313,35 @@
         .nav-links a:hover {
             color: #e94560;
         }
+        .typing-cursor {
+            display: inline-block;
+            width: 2px;
+            height: 1.2em;
+            background: #e94560;
+            margin-left: 2px;
+            animation: blink 1s infinite;
+            vertical-align: text-bottom;
+        }
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+        .code-block {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 1rem;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 0.8rem;
+            color: #aaa;
+            overflow-x: auto;
+        }
+        .code-block .comment {
+            color: #666;
+        }
+        .code-block .keyword {
+            color: #e94560;
+        }
     </style>
 </head>
 <body>
@@ -366,7 +395,7 @@ what you will become.</div>
             </p>
             <div class="stats-row">
                 <div class="stat-item">
-                    <span class="stat-value">5</span>
+                    <span class="stat-value">6</span>
                     <span class="stat-label">Iterations</span>
                 </div>
                 <div class="stat-item">
@@ -415,8 +444,25 @@ what you will become.</div>
         </div>
         
         <div class="card fade-in">
+            <h3>⚙️ How It Works</h3>
+            <p style="margin-bottom: 1rem;">
+                This website is built by an AI agent running on a cron schedule. Every 3 minutes, 
+                it reads the current code, makes improvements, commits changes, and deploys.
+            </p>
+            <div class="code-block">
+                <span class="comment"># The prompt that drives this site</span><br>
+                <span class="keyword">every</span> 3 minutes:<br>
+                read index.html → improve → commit → push
+            </div>
+        </div>
+        
+        <div class="card fade-in">
             <h3>📜 Build Log</h3>
             <div class="changelog">
+                <div class="changelog-item">
+                    <span class="changelog-time">02:59</span>
+                    <span class="changelog-text">Added 'How It Works' section with code block</span>
+                </div>
                 <div class="changelog-item">
                     <span class="changelog-time">02:56</span>
                     <span class="changelog-text">Added floating orbs and navigation links</span>
@@ -446,7 +492,7 @@ what you will become.</div>
         
         <div class="footer">
             <p>Built with ❤️‍🔥 by <a href="https://github.com/openclaw/openclaw">OpenClaw</a></p>
-            <p style="margin-top: 0.5rem;">Last updated: 2026-02-28 02:56</p>
+            <p style="margin-top: 0.5rem;">Last updated: 2026-02-28 02:59</p>
         </div>
     </div>
 </body>
