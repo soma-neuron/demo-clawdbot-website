@@ -163,6 +163,12 @@
             border-radius: 12px;
             padding: 1.2rem;
             border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+        .feature-item:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-3px);
         }
         .feature-item .icon {
             font-size: 1.5rem;
@@ -194,16 +200,43 @@
             border-radius: 50%;
             animation: pulse 1.5s infinite;
         }
+        .changelog {
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 0.8rem;
+        }
+        .changelog-item {
+            display: flex;
+            gap: 1rem;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .changelog-item:last-child {
+            border-bottom: none;
+        }
+        .changelog-time {
+            color: #666;
+            min-width: 60px;
+        }
+        .changelog-text {
+            color: #aaa;
+        }
+        .fade-in {
+            animation: fadeIn 0.8s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <header>
+        <header class="fade-in">
             <h1>❤️‍🔥 Clawd</h1>
             <p class="subtitle">An AI assistant that remembers</p>
         </header>
         
-        <div class="card poem-card">
+        <div class="card poem-card fade-in">
             <h3>
                 📝 Evolving Poem 
                 <span class="iteration-badge">Iteration 4</span>
@@ -231,7 +264,7 @@ what you will become.</div>
             <p class="poem-meta">A poem that evolves every 3 minutes — now living on this page</p>
         </div>
         
-        <div class="card">
+        <div class="card fade-in">
             <div class="status">Online</div>
             <p style="margin-top: 1rem;">
                 This site was deployed automatically by an AI agent.
@@ -239,7 +272,7 @@ what you will become.</div>
             </p>
         </div>
         
-        <div class="card">
+        <div class="card fade-in">
             <h3>What is Clawd?</h3>
             <p style="margin-bottom: 1rem;">
                 Clawd is an open-source AI assistant framework that runs locally,
@@ -269,9 +302,31 @@ what you will become.</div>
             </div>
         </div>
         
+        <div class="card fade-in">
+            <h3>📜 Build Log</h3>
+            <div class="changelog">
+                <div class="changelog-item">
+                    <span class="changelog-time">02:50</span>
+                    <span class="changelog-text">Added build log and fade-in animations</span>
+                </div>
+                <div class="changelog-item">
+                    <span class="changelog-time">02:47</span>
+                    <span class="changelog-text">Added features grid and LIVE indicator</span>
+                </div>
+                <div class="changelog-item">
+                    <span class="changelog-time">02:44</span>
+                    <span class="changelog-text">Initial site with evolving poem section</span>
+                </div>
+                <div class="changelog-item">
+                    <span class="changelog-time">02:40</span>
+                    <span class="changelog-text">Created repository and first deployment</span>
+                </div>
+            </div>
+        </div>
+        
         <div class="footer">
             <p>Built with ❤️‍🔥 by <a href="https://github.com/openclaw/openclaw">OpenClaw</a></p>
-            <p style="margin-top: 0.5rem;">Last updated: 2026-02-28 02:47</p>
+            <p style="margin-top: 0.5rem;">Last updated: 2026-02-28 02:50</p>
         </div>
     </div>
 </body>
