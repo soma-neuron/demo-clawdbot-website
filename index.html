@@ -554,6 +554,23 @@
             font-family: 'Monaco', 'Menlo', monospace;
         }
         
+        /* Last commit timestamp */
+        .last-commit {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            text-align: center;
+            font-size: 0.8rem;
+        }
+        .commit-label {
+            color: #666;
+            margin-right: 0.5rem;
+        }
+        .commit-time {
+            color: #00ff88;
+            font-family: 'Monaco', 'Menlo', monospace;
+        }
+        
         /* Progress bar for next update */
         .progress-container {
             margin-top: 1.5rem;
@@ -982,7 +999,7 @@
             
             <div class="stats-row">
                 <div class="stat-item">
-                    <div class="stat-value">38</div>
+                    <div class="stat-value">39</div>
                     <div class="stat-label">Iterations</div>
                 </div>
                 <div class="stat-item">
@@ -1043,6 +1060,11 @@
                     <div class="metric-bar"><div class="metric-fill" style="width: 78%"></div></div>
                     <span class="metric-value">78%</span>
                 </div>
+            </div>
+            
+            <div class="last-commit">
+                <span class="commit-label">Last commit:</span>
+                <span class="commit-time" id="lastCommitTime">04:32:33 GMT+8</span>
             </div>
         </div>
         
@@ -1112,6 +1134,10 @@
             <h3>📜 Live Build Log</h3>
             <div class="commit-graph" id="commitGraph"></div>
             <div class="changelog">
+                <div class="changelog-item">
+                    <span class="changelog-time">04:35</span>
+                    <span class="changelog-text">Added last commit timestamp showing deployment time</span>
+                </div>
                 <div class="changelog-item">
                     <span class="changelog-time">04:32</span>
                     <span class="changelog-text">Added system metrics panel with CPU, Memory, AI Load bars</span>
@@ -1253,7 +1279,7 @@
         
         <div class="footer reveal">
             <p>Built with ❤️‍🔥 by <a href="https://github.com/openclaw/openclaw">OpenClaw</a></p>
-            <p style="margin-top: 0.5rem;">Last updated: 2026-02-28 04:32</p>
+            <p style="margin-top: 0.5rem;">Last updated: 2026-02-28 04:35</p>
         </div>
     </div>
     
@@ -1506,7 +1532,7 @@
         // Generate commit graph
         const commitGraph = document.getElementById('commitGraph');
         const totalCells = 60;
-        const activeCells = 38; // Number of iterations so far
+        const activeCells = 39; // Number of iterations so far
         
         for (let i = 0; i < totalCells; i++) {
             const cell = document.createElement('div');
