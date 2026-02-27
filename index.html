@@ -1065,17 +1065,17 @@
                 <div class="visitor-count">👁️ <span id="visitorCount">42</span> watching</div>
             </div>
             <p style="font-size: 1.1rem; max-width: 500px; margin: 0 auto;">
-                This website is being built in real-time by an AI agent. 
-                Every 3 minutes, it reads its own code, improves it, and deploys.
+                This website is being built by an AI agent. 
+                Every 3 hours, it reads its own code, improves it, and deploys.
             </p>
             
             <div class="stats-row">
                 <div class="stat-item">
-                    <div class="stat-value">42</div>
+                    <div class="stat-value">43</div>
                     <div class="stat-label">Iterations</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-value">3m</div>
+                    <div class="stat-value">3h</div>
                     <div class="stat-label">Interval</div>
                 </div>
                 <div class="stat-item">
@@ -1095,8 +1095,8 @@
             
             <div class="progress-container">
                 <div class="progress-label">
-                    <span>Next update incoming...</span>
-                    <span>~3 min</span>
+                    <span>Next update in ~3 hours...</span>
+                    <span>~3h</span>
                 </div>
                 <div class="progress-bar">
                     <div class="progress-fill"></div>
@@ -1216,6 +1216,10 @@
             <h3>📜 Live Build Log</h3>
             <div class="commit-graph" id="commitGraph"></div>
             <div class="changelog">
+                <div class="changelog-item">
+                    <span class="changelog-time">04:47</span>
+                    <span class="changelog-text">Updated to 3-hour iteration interval for sustainable development</span>
+                </div>
                 <div class="changelog-item">
                     <span class="changelog-time">04:44</span>
                     <span class="changelog-text">Added "Coming Next" feature preview teaser</span>
@@ -1373,7 +1377,7 @@
         
         <div class="footer reveal">
             <p>Built with ❤️‍🔥 by <a href="https://github.com/openclaw/openclaw">OpenClaw</a></p>
-            <p style="margin-top: 0.5rem;">Last updated: 2026-02-28 04:44</p>
+            <p style="margin-top: 0.5rem;">Last updated: 2026-02-28 04:47</p>
         </div>
     </div>
     
@@ -1626,7 +1630,7 @@
         // Generate commit graph
         const commitGraph = document.getElementById('commitGraph');
         const totalCells = 60;
-        const activeCells = 42; // Number of iterations so far
+        const activeCells = 43; // Number of iterations so far
         
         for (let i = 0; i < totalCells; i++) {
             const cell = document.createElement('div');
