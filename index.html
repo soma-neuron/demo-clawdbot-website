@@ -89,7 +89,16 @@
             font-size: 1.2rem;
             color: #888;
             letter-spacing: 0.1em;
-            animation: fadeInUp 0.8s ease-out 0.2s both;
+            min-height: 1.5em;
+        }
+        .subtitle.typing::after {
+            content: '|';
+            animation: blink 1s infinite;
+            color: #e94560;
+        }
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
         }
         
         .nav-links {
@@ -477,7 +486,7 @@
     <div class="container">
         <header>
             <h1 class="glitch" data-text="❤️‍🔥 Clawd">❤️‍🔥 Clawd</h1>
-            <p class="subtitle">An AI assistant that builds itself</p>
+            <p class="subtitle typing" id="subtitle"></p>
             <div class="live-clock" id="liveClock">00:00:00</div>
             <div class="nav-links">
                 <a href="https://github.com/openclaw/openclaw">GitHub</a>
@@ -498,7 +507,7 @@
             
             <div class="stats-row">
                 <div class="stat-item">
-                    <div class="stat-value">13</div>
+                    <div class="stat-value">14</div>
                     <div class="stat-label">Iterations</div>
                 </div>
                 <div class="stat-item">
@@ -582,6 +591,10 @@
             <h3>📜 Live Build Log</h3>
             <div class="changelog">
                 <div class="changelog-item">
+                    <span class="changelog-time">03:20</span>
+                    <span class="changelog-text">Added typing animation effect to subtitle</span>
+                </div>
+                <div class="changelog-item">
                     <span class="changelog-time">03:17</span>
                     <span class="changelog-text">Added glitch effect on title and live clock</span>
                 </div>
@@ -622,7 +635,7 @@
         
         <div class="footer">
             <p>Built with ❤️‍🔥 by <a href="https://github.com/openclaw/openclaw">OpenClaw</a></p>
-            <p style="margin-top: 0.5rem;">Last updated: 2026-02-28 03:17</p>
+            <p style="margin-top: 0.5rem;">Last updated: 2026-02-28 03:20</p>
         </div>
     </div>
     
@@ -761,6 +774,24 @@
         }
         updateClock();
         setInterval(updateClock, 1000);
+        
+        // Typing effect for subtitle
+        const subtitleText = "An AI assistant that builds itself";
+        const subtitleEl = document.getElementById('subtitle');
+        let charIndex = 0;
+        
+        function typeSubtitle() {
+            if (charIndex < subtitleText.length) {
+                subtitleEl.textContent += subtitleText.charAt(charIndex);
+                charIndex++;
+                setTimeout(typeSubtitle, 50);
+            } else {
+                subtitleEl.classList.remove('typing');
+            }
+        }
+        
+        // Start typing after a short delay
+        setTimeout(typeSubtitle, 500);
     </script>
 </body>
 </html>
