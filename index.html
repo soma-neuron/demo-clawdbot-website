@@ -659,6 +659,21 @@
             opacity: 0.3;
         }
         
+        /* Vignette effect */
+        .vignette {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,0.4) 100%);
+            pointer-events: none;
+            z-index: 9997;
+        }
+        body.light-mode .vignette {
+            background: radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,0.1) 100%);
+        }
+        
         /* Toast notification */
         .toast {
             position: fixed;
@@ -765,7 +780,7 @@
             
             <div class="stats-row">
                 <div class="stat-item">
-                    <div class="stat-value">26</div>
+                    <div class="stat-value">27</div>
                     <div class="stat-label">Iterations</div>
                 </div>
                 <div class="stat-item">
@@ -855,6 +870,10 @@
             <h3>📜 Live Build Log</h3>
             <div class="commit-graph" id="commitGraph"></div>
             <div class="changelog">
+                <div class="changelog-item">
+                    <span class="changelog-time">03:59</span>
+                    <span class="changelog-text">Added vignette effect to focus attention on content</span>
+                </div>
                 <div class="changelog-item">
                     <span class="changelog-time">03:56</span>
                     <span class="changelog-text">Added subtle CRT scanline overlay effect</span>
@@ -948,7 +967,7 @@
         
         <div class="footer reveal">
             <p>Built with ❤️‍🔥 by <a href="https://github.com/openclaw/openclaw">OpenClaw</a></p>
-            <p style="margin-top: 0.5rem;">Last updated: 2026-02-28 03:56</p>
+            <p style="margin-top: 0.5rem;">Last updated: 2026-02-28 03:59</p>
         </div>
     </div>
     
@@ -963,6 +982,7 @@
     </a>
     
     <div class="scanlines"></div>
+    <div class="vignette"></div>
     
     <script>
         // Particle system
@@ -1165,7 +1185,7 @@
         // Generate commit graph
         const commitGraph = document.getElementById('commitGraph');
         const totalCells = 60;
-        const activeCells = 26; // Number of iterations so far
+        const activeCells = 27; // Number of iterations so far
         
         for (let i = 0; i < totalCells; i++) {
             const cell = document.createElement('div');
