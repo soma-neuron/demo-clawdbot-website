@@ -549,6 +549,32 @@
             background: rgba(0, 0, 0, 0.08);
         }
         
+        /* Toast notification */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: rgba(0, 255, 136, 0.15);
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            border-radius: 12px;
+            padding: 1rem 1.5rem;
+            color: #00ff88;
+            font-size: 0.9rem;
+            backdrop-filter: blur(10px);
+            transform: translateX(150%);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .toast.show {
+            transform: translateX(0);
+        }
+        .toast-icon {
+            font-size: 1.2rem;
+        }
+        
         /* Scroll reveal animation */
         .reveal {
             opacity: 0;
@@ -591,7 +617,7 @@
             
             <div class="stats-row">
                 <div class="stat-item">
-                    <div class="stat-value">18</div>
+                    <div class="stat-value">19</div>
                     <div class="stat-label">Iterations</div>
                 </div>
                 <div class="stat-item">
@@ -676,6 +702,10 @@
             <div class="commit-graph" id="commitGraph"></div>
             <div class="changelog">
                 <div class="changelog-item">
+                    <span class="changelog-time">03:35</span>
+                    <span class="changelog-text">Added toast notification for site updates</span>
+                </div>
+                <div class="changelog-item">
                     <span class="changelog-time">03:32</span>
                     <span class="changelog-text">Added confetti celebration effect on demo completion</span>
                 </div>
@@ -736,8 +766,13 @@
         
         <div class="footer reveal">
             <p>Built with ❤️‍🔥 by <a href="https://github.com/openclaw/openclaw">OpenClaw</a></p>
-            <p style="margin-top: 0.5rem;">Last updated: 2026-02-28 03:32</p>
+            <p style="margin-top: 0.5rem;">Last updated: 2026-02-28 03:35</p>
         </div>
+    </div>
+    
+    <div class="toast" id="updateToast">
+        <span class="toast-icon">🔄</span>
+        <span>Site updated! New iteration deployed.</span>
     </div>
     
     <script>
@@ -941,7 +976,7 @@
         // Generate commit graph
         const commitGraph = document.getElementById('commitGraph');
         const totalCells = 60;
-        const activeCells = 18; // Number of iterations so far
+        const activeCells = 19; // Number of iterations so far
         
         for (let i = 0; i < totalCells; i++) {
             const cell = document.createElement('div');
@@ -951,6 +986,18 @@
             }
             commitGraph.appendChild(cell);
         }
+        
+        // Toast notification for updates
+        function showUpdateToast() {
+            const toast = document.getElementById('updateToast');
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 4000);
+        }
+        
+        // Show toast on load (simulating a recent update)
+        setTimeout(showUpdateToast, 2000);
         
         // Scroll reveal animation
         const reveals = document.querySelectorAll('.reveal');
