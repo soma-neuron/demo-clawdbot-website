@@ -81,6 +81,18 @@
         .poem-card {
             background: linear-gradient(135deg, rgba(233, 69, 96, 0.1), rgba(255, 107, 107, 0.05));
             border-color: rgba(233, 69, 96, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        .poem-card::before {
+            content: '"';
+            position: absolute;
+            top: -20px;
+            right: 20px;
+            font-size: 8rem;
+            color: rgba(233, 69, 96, 0.1);
+            font-family: Georgia, serif;
+            line-height: 1;
         }
         .poem-card h3 {
             color: #e94560;
@@ -98,6 +110,8 @@
             line-height: 2;
             color: #f0f0f0;
             white-space: pre-line;
+            position: relative;
+            z-index: 1;
         }
         .poem-meta {
             margin-top: 1.5rem;
@@ -138,6 +152,48 @@
             font-size: 0.75rem;
             margin-left: 0.5rem;
         }
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .feature-item {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            padding: 1.2rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .feature-item .icon {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .feature-item h4 {
+            font-size: 0.95rem;
+            color: #eaeaea;
+            margin-bottom: 0.3rem;
+        }
+        .feature-item p {
+            font-size: 0.85rem;
+            color: #888;
+            line-height: 1.5;
+        }
+        .live-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.75rem;
+            color: #00ff88;
+            margin-left: auto;
+        }
+        .live-indicator::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: #00ff88;
+            border-radius: 50%;
+            animation: pulse 1.5s infinite;
+        }
     </style>
 </head>
 <body>
@@ -148,7 +204,11 @@
         </header>
         
         <div class="card poem-card">
-            <h3>📝 Evolving Poem <span class="iteration-badge">Iteration 4</span></h3>
+            <h3>
+                📝 Evolving Poem 
+                <span class="iteration-badge">Iteration 4</span>
+                <span class="live-indicator">LIVE</span>
+            </h3>
             <div class="poem">The first line waits,
 a ghost of meaning
 half-formed, half-seen
@@ -180,17 +240,38 @@ what you will become.</div>
         </div>
         
         <div class="card">
-            <h3>What is this?</h3>
-            <p>
-                Clawd is an open-source AI assistant framework. It runs locally, 
-                remembers conversations across sessions, and can be extended with skills 
-                to interact with the world.
+            <h3>What is Clawd?</h3>
+            <p style="margin-bottom: 1rem;">
+                Clawd is an open-source AI assistant framework that runs locally,
+                remembers conversations across sessions, and evolves through automated iterations.
             </p>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="icon">🧠</div>
+                    <h4>Memory</h4>
+                    <p>Remembers context across sessions</p>
+                </div>
+                <div class="feature-item">
+                    <div class="icon">⚡</div>
+                    <h4>Local</h4>
+                    <p>Runs on your own machine</p>
+                </div>
+                <div class="feature-item">
+                    <div class="icon">🔧</div>
+                    <h4>Extensible</h4>
+                    <p>Add skills for any task</p>
+                </div>
+                <div class="feature-item">
+                    <div class="icon">🔄</div>
+                    <h4>Evolving</h4>
+                    <p>Self-improving through cron jobs</p>
+                </div>
+            </div>
         </div>
         
         <div class="footer">
             <p>Built with ❤️‍🔥 by <a href="https://github.com/openclaw/openclaw">OpenClaw</a></p>
-            <p style="margin-top: 0.5rem;">Last updated: 2026-02-28 02:44</p>
+            <p style="margin-top: 0.5rem;">Last updated: 2026-02-28 02:47</p>
         </div>
     </div>
 </body>
