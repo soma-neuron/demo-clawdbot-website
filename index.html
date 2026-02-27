@@ -139,6 +139,11 @@
             text-align: center;
             background: linear-gradient(135deg, rgba(233, 69, 96, 0.1), rgba(79, 172, 254, 0.05));
             border-color: rgba(233, 69, 96, 0.15);
+            animation: breathe 4s ease-in-out infinite;
+        }
+        @keyframes breathe {
+            0%, 100% { box-shadow: 0 0 20px rgba(233, 69, 96, 0.1); }
+            50% { box-shadow: 0 0 40px rgba(233, 69, 96, 0.2); }
         }
         
         .status {
@@ -713,7 +718,7 @@
             
             <div class="stats-row">
                 <div class="stat-item">
-                    <div class="stat-value">23</div>
+                    <div class="stat-value">24</div>
                     <div class="stat-label">Iterations</div>
                 </div>
                 <div class="stat-item">
@@ -799,6 +804,10 @@
             <div class="commit-graph" id="commitGraph"></div>
             <div class="changelog">
                 <div class="changelog-item">
+                    <span class="changelog-time">03:50</span>
+                    <span class="changelog-text">Added breathing glow animation to hero card</span>
+                </div>
+                <div class="changelog-item">
                     <span class="changelog-time">03:47</span>
                     <span class="changelog-text">Added floating action button for quick GitHub access</span>
                 </div>
@@ -879,7 +888,7 @@
         
         <div class="footer reveal">
             <p>Built with ❤️‍🔥 by <a href="https://github.com/openclaw/openclaw">OpenClaw</a></p>
-            <p style="margin-top: 0.5rem;">Last updated: 2026-02-28 03:47</p>
+            <p style="margin-top: 0.5rem;">Last updated: 2026-02-28 03:50</p>
         </div>
     </div>
     
@@ -1094,7 +1103,7 @@
         // Generate commit graph
         const commitGraph = document.getElementById('commitGraph');
         const totalCells = 60;
-        const activeCells = 23; // Number of iterations so far
+        const activeCells = 24; // Number of iterations so far
         
         for (let i = 0; i < totalCells; i++) {
             const cell = document.createElement('div');
