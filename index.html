@@ -591,7 +591,7 @@
             
             <div class="stats-row">
                 <div class="stat-item">
-                    <div class="stat-value">17</div>
+                    <div class="stat-value">18</div>
                     <div class="stat-label">Iterations</div>
                 </div>
                 <div class="stat-item">
@@ -676,6 +676,10 @@
             <div class="commit-graph" id="commitGraph"></div>
             <div class="changelog">
                 <div class="changelog-item">
+                    <span class="changelog-time">03:32</span>
+                    <span class="changelog-text">Added confetti celebration effect on demo completion</span>
+                </div>
+                <div class="changelog-item">
                     <span class="changelog-time">03:29</span>
                     <span class="changelog-text">Added scroll reveal animations on cards</span>
                 </div>
@@ -732,7 +736,7 @@
         
         <div class="footer reveal">
             <p>Built with ❤️‍🔥 by <a href="https://github.com/openclaw/openclaw">OpenClaw</a></p>
-            <p style="margin-top: 0.5rem;">Last updated: 2026-02-28 03:29</p>
+            <p style="margin-top: 0.5rem;">Last updated: 2026-02-28 03:32</p>
         </div>
     </div>
     
@@ -822,8 +826,45 @@
                 setTimeout(() => {
                     line.style.transition = 'opacity 0.2s';
                     line.style.opacity = '1';
+                    
+                    // Trigger confetti on the last line
+                    if (i === lines.length - 1) {
+                        setTimeout(createConfetti, 300);
+                    }
                 }, i * 200);
             });
+        }
+        
+        // Confetti effect
+        function createConfetti() {
+            const colors = ['#e94560', '#ff6b6b', '#00ff88', '#feca57', '#4facfe'];
+            const container = document.body;
+            
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.style.position = 'fixed';
+                confetti.style.width = '10px';
+                confetti.style.height = '10px';
+                confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.top = '-10px';
+                confetti.style.borderRadius = '50%';
+                confetti.style.zIndex = '9999';
+                confetti.style.pointerEvents = 'none';
+                container.appendChild(confetti);
+                
+                const duration = Math.random() * 2 + 1;
+                const delay = Math.random() * 0.5;
+                
+                confetti.animate([
+                    { transform: 'translateY(0) rotate(0deg)', opacity: 1 },
+                    { transform: `translateY(${window.innerHeight}px) rotate(${Math.random() * 360}deg)`, opacity: 0 }
+                ], {
+                    duration: duration * 1000,
+                    delay: delay * 1000,
+                    easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+                }).onfinish = () => confetti.remove();
+            }
         }
         
         // Keyboard shortcut: Press 'C' to trigger demo
@@ -900,7 +941,7 @@
         // Generate commit graph
         const commitGraph = document.getElementById('commitGraph');
         const totalCells = 60;
-        const activeCells = 17; // Number of iterations so far
+        const activeCells = 18; // Number of iterations so far
         
         for (let i = 0; i < totalCells; i++) {
             const cell = document.createElement('div');
