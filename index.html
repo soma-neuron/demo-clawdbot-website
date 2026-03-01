@@ -798,8 +798,222 @@
             0%, 50% { opacity: 1; }
             51%, 100% { opacity: 0; }
         }
-            margin-top: 1.5rem;
+        
+        /* Magnetic button effect */
+        .magnetic-btn {
+            position: relative;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
+        
+        /* Spotlight effect */
+        .spotlight {
+            position: fixed;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(233, 69, 96, 0.15) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 9995;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        body:hover .spotlight {
+            opacity: 1;
+        }
+        
+        /* Animated background mesh */
+        .mesh-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -3;
+            opacity: 0.3;
+            background: 
+                radial-gradient(at 40% 20%, hsla(348,100%,60%,1) 0px, transparent 50%),
+                radial-gradient(at 80% 0%, hsla(280,100%,60%,1) 0px, transparent 50%),
+                radial-gradient(at 0% 50%, hsla(220,100%,60%,1) 0px, transparent 50%),
+                radial-gradient(at 80% 50%, hsla(340,100%,60%,1) 0px, transparent 50%),
+                radial-gradient(at 0% 100%, hsla(260,100%,60%,1) 0px, transparent 50%),
+                radial-gradient(at 80% 100%, hsla(200,100%,60%,1) 0px, transparent 50%);
+            animation: meshMove 20s ease-in-out infinite;
+        }
+        @keyframes meshMove {
+            0%, 100% {
+                background-position: 0% 0%, 100% 0%, 0% 50%, 100% 50%, 0% 100%, 100% 100%;
+            }
+            50% {
+                background-position: 100% 0%, 0% 0%, 100% 50%, 0% 50%, 100% 100%, 0% 100%;
+            }
+        }
+        
+        /* Liquid button effect */
+        .liquid-btn {
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        .liquid-btn::before {
+            content: '';
+            position: absolute;
+            top: var(--y, 50%);
+            left: var(--x, 50%);
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+            z-index: -1;
+        }
+        .liquid-btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+        
+        /* Text scramble effect container */
+        .scramble-text {
+            display: inline-block;
+        }
+        
+        /* Interactive terminal */
+        .terminal {
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 12px;
+            padding: 1.5rem;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 0.85rem;
+            color: #00ff88;
+            border: 1px solid rgba(0, 255, 136, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        .terminal::before {
+            content: '● ● ●';
+            position: absolute;
+            top: 0.75rem;
+            left: 1rem;
+            color: #444;
+            font-size: 0.6rem;
+            letter-spacing: 0.3em;
+        }
+        .terminal-content {
+            margin-top: 1.5rem;
+            line-height: 1.6;
+        }
+        .terminal-line {
+            opacity: 0;
+            transform: translateX(-10px);
+            animation: terminalLineIn 0.3s ease-out forwards;
+        }
+        @keyframes terminalLineIn {
+            to { opacity: 1; transform: translateX(0); }
+        }
+        .terminal-prompt {
+            color: #e94560;
+        }
+        .terminal-cursor {
+            display: inline-block;
+            width: 8px;
+            height: 1em;
+            background: #00ff88;
+            animation: terminalBlink 1s infinite;
+            vertical-align: middle;
+            margin-left: 2px;
+        }
+        @keyframes terminalBlink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+        
+        /* Wave text animation */
+        .wave-text span {
+            display: inline-block;
+            animation: wave 1s ease-in-out infinite;
+        }
+        .wave-text span:nth-child(1) { animation-delay: 0s; }
+        .wave-text span:nth-child(2) { animation-delay: 0.1s; }
+        .wave-text span:nth-child(3) { animation-delay: 0.2s; }
+        .wave-text span:nth-child(4) { animation-delay: 0.3s; }
+        .wave-text span:nth-child(5) { animation-delay: 0.4s; }
+        .wave-text span:nth-child(6) { animation-delay: 0.5s; }
+        .wave-text span:nth-child(7) { animation-delay: 0.6s; }
+        .wave-text span:nth-child(8) { animation-delay: 0.7s; }
+        @keyframes wave {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+        
+        /* Glitch effect on hover */
+        .glitch-hover:hover {
+            animation: glitchHover 0.3s ease-in-out;
+        }
+        @keyframes glitchHover {
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+            100% { transform: translate(0); }
+        }
+        
+        /* Orbiting elements */
+        .orbit-container {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            margin: 2rem auto;
+        }
+        .orbit-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #e94560, #ff6b6b);
+            border-radius: 50%;
+            box-shadow: 0 0 30px rgba(233, 69, 96, 0.5);
+        }
+        .orbit-item {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            margin-top: -10px;
+            margin-left: -10px;
+        }
+        .orbit-item:nth-child(2) {
+            background: #00ff88;
+            box-shadow: 0 0 10px #00ff88;
+            animation: orbit1 4s linear infinite;
+        }
+        .orbit-item:nth-child(3) {
+            background: #feca57;
+            box-shadow: 0 0 10px #feca57;
+            animation: orbit2 6s linear infinite;
+        }
+        .orbit-item:nth-child(4) {
+            background: #4facfe;
+            box-shadow: 0 0 10px #4facfe;
+            animation: orbit3 8s linear infinite;
+        }
+        @keyframes orbit1 {
+            from { transform: rotate(0deg) translateX(80px) rotate(0deg); }
+            to { transform: rotate(360deg) translateX(80px) rotate(-360deg); }
+        }
+        @keyframes orbit2 {
+            from { transform: rotate(120deg) translateX(100px) rotate(-120deg); }
+            to { transform: rotate(480deg) translateX(100px) rotate(-480deg); }
+        }
+        @keyframes orbit3 {
+            from { transform: rotate(240deg) translateX(60px) rotate(-240deg); }
+            to { transform: rotate(600deg) translateX(60px) rotate(-600deg); }
+        }
+        
         .progress-label {
             font-size: 0.75rem;
             color: #666;
@@ -1194,6 +1408,8 @@
         </div>
     </div>
     
+    <div class="mesh-bg"></div>
+    <div class="spotlight" id="spotlight"></div>
     <div class="gradient-bg"></div>
     <canvas id="particles"></canvas>
     
@@ -1304,39 +1520,64 @@
             </div>
             
             <div class="next-feature">
-                <div class="next-feature-label">Coming in Iteration 53</div>
-                <div class="next-feature-text">Interactive 3D card tilt effects...</div>
+                <div class="next-feature-label">Coming in Iteration 54</div>
+                <div class="next-feature-text">AI-powered voice interaction and WebGL shaders...</div>
             </div>
         </div>
         
         <div class="card reveal">
             <h3 class="glow-text">⚡ What Makes Clawd Different?</h3>
             <div class="features-grid">
-                <div class="feature-item">
+                <div class="feature-item liquid-btn" onmousemove="updateLiquid(event, this)">
                     <span class="icon">🧠</span>
                     <h4>Persistent Memory</h4>
                     <p>Remembers everything across sessions</p>
                 </div>
-                <div class="feature-item">
+                <div class="feature-item liquid-btn" onmousemove="updateLiquid(event, this)">
                     <span class="icon">⚡</span>
                     <h4>Runs Local</h4>
                     <p>Your data stays on your machine</p>
                 </div>
-                <div class="feature-item">
+                <div class="feature-item liquid-btn" onmousemove="updateLiquid(event, this)">
                     <span class="icon">🔧</span>
                     <h4>Extensible</h4>
                     <p>Add skills for any task</p>
                 </div>
-                <div class="feature-item">
+                <div class="feature-item liquid-btn" onmousemove="updateLiquid(event, this)">
                     <span class="icon">🔄</span>
                     <h4>Self-Improving</h4>
                     <p>Works on tasks autonomously</p>
                 </div>
             </div>
             
-            <a href="https://github.com/openclaw/openclaw" class="cta-button" target="_blank">
+            <a href="https://github.com/openclaw/openclaw" class="cta-button liquid-btn" target="_blank" onmousemove="updateLiquid(event, this)">
                 🚀 Get Started →
             </a>
+        </div>
+        
+        <div class="card reveal">
+            <h3 class="wave-text glitch-hover"><span>🚀</span><span> </span><span>L</span><span>i</span><span>v</span><span>e</span><span> </span><span>S</span><span>y</span><span>s</span><span>t</span><span>e</span><span>m</span></h3>
+            
+            <div class="orbit-container">
+                <div class="orbit-center"></div>
+                <div class="orbit-item"></div>
+                <div class="orbit-item"></div>
+                <div class="orbit-item"></div>
+            </div>
+            
+            <div class="terminal">
+                <div class="terminal-content" id="terminalContent">
+                    <div class="terminal-line" style="animation-delay: 0s;"><span class="terminal-prompt">$</span> clawd --status</div>
+                    <div class="terminal-line" style="animation-delay: 0.3s;">✓ AI Agent: <span style="color: #00ff88;">ONLINE</span></div>
+                    <div class="terminal-line" style="animation-delay: 0.6s;">✓ Memory System: <span style="color: #00ff88;">ACTIVE</span></div>
+                    <div class="terminal-line" style="animation-delay: 0.9s;">✓ Auto-Deploy: <span style="color: #00ff88;">ENABLED</span></div>
+                    <div class="terminal-line" style="animation-delay: 1.2s;"><span class="terminal-prompt">$</span> <span id="typingCommand"></span><span class="terminal-cursor"></span></div>
+                </div>
+            </div>
+            
+            <p style="font-size: 0.8rem; color: #666; margin-top: 1rem; text-align: center;">
+                Watch the system self-evolve in real-time. Every 3 hours, a new iteration.
+            </p>
         </div>
         
         <div class="card reveal">
@@ -1375,6 +1616,10 @@
             <h3>📜 Live Build Log</h3>
             <div class="commit-graph" id="commitGraph"></div>
             <div class="changelog">
+                <div class="changelog-item">
+                    <span class="changelog-time">08:29</span>
+                    <span class="changelog-text">Iteration 53: Added animated mesh background, mouse spotlight effect, liquid button fills, orbital system visualization, wave text animations, and interactive terminal</span>
+                </div>
                 <div class="changelog-item">
                     <span class="changelog-time">05:29</span>
                     <span class="changelog-text">Iteration 52: Added 3D card tilt effects, holographic shine, click particle bursts, and animated counters</span>
@@ -1572,7 +1817,7 @@
         
         <div class="footer reveal">
             <p>Built with ❤️‍🔥 by <a href="https://github.com/openclaw/openclaw">OpenClaw</a></p>
-            <p style="margin-top: 0.5rem;">Last updated: 2026-03-01 05:29</p>
+            <p style="margin-top: 0.5rem;">Last updated: 2026-03-01 08:29</p>
         </div>
     </div>
     
@@ -1825,7 +2070,7 @@
         // Generate commit graph
         const commitGraph = document.getElementById('commitGraph');
         const totalCells = 60;
-        const activeCells = 52; // Number of iterations so far
+        const activeCells = 53; // Number of iterations so far
         
         for (let i = 0; i < totalCells; i++) {
             const cell = document.createElement('div');
@@ -1911,7 +2156,50 @@
         setTimeout(showUpdateToast, 2000);
         
         // Update page title with iteration count
-        document.title = `Clawd — ${52} Iterations of AI Evolution`;
+        document.title = `Clawd — ${53} Iterations of AI Evolution`;
+        
+        // Spotlight effect following mouse
+        document.addEventListener('mousemove', (e) => {
+            const spotlight = document.getElementById('spotlight');
+            if (spotlight) {
+                spotlight.style.left = e.clientX + 'px';
+                spotlight.style.top = e.clientY + 'px';
+            }
+        });
+        
+        // Liquid button effect
+        function updateLiquid(e, btn) {
+            const rect = btn.getBoundingClientRect();
+            const x = ((e.clientX - rect.left) / rect.width) * 100;
+            const y = ((e.clientY - rect.top) / rect.height) * 100;
+            btn.style.setProperty('--x', x + '%');
+            btn.style.setProperty('--y', y + '%');
+        }
+        
+        // Terminal typing effect
+        const commands = ['git commit -m "Iteration 53"', 'clawd deploy --prod', 'npm run evolve'];
+        let cmdIndex = 0;
+        let charIndex2 = 0;
+        const typingCommand = document.getElementById('typingCommand');
+        
+        function typeCommand() {
+            if (!typingCommand) return;
+            const currentCmd = commands[cmdIndex];
+            
+            if (charIndex2 < currentCmd.length) {
+                typingCommand.textContent += currentCmd.charAt(charIndex2);
+                charIndex2++;
+                setTimeout(typeCommand, 100 + Math.random() * 100);
+            } else {
+                setTimeout(() => {
+                    typingCommand.textContent = '';
+                    charIndex2 = 0;
+                    cmdIndex = (cmdIndex + 1) % commands.length;
+                    typeCommand();
+                }, 2000);
+            }
+        }
+        setTimeout(typeCommand, 2000);
         
         // Animated counter for iteration display
         function animateCounter(element, target, duration = 1000) {
@@ -1934,7 +2222,7 @@
         // Animate iteration counter on load
         setTimeout(() => {
             const counter = document.getElementById('iterationCounter');
-            if (counter) animateCounter(counter, 52);
+            if (counter) animateCounter(counter, 53);
         }, 2000);
         
         // 3D Tilt effect for cards
