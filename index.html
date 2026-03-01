@@ -1241,6 +1241,147 @@
             100% { width: 200px; height: 200px; opacity: 0; }
         }
         
+        /* Synthwave grid */
+        .synth-grid {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 50vh;
+            z-index: -7;
+            perspective: 500px;
+            overflow: hidden;
+            opacity: 0.3;
+        }
+        .synth-grid-inner {
+            position: absolute;
+            bottom: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: 
+                linear-gradient(transparent 0%, rgba(233, 69, 96, 0.3) 2%, transparent 3%),
+                linear-gradient(90deg, transparent 0%, rgba(233, 69, 96, 0.3) 2%, transparent 3%);
+            background-size: 50px 50px;
+            transform: rotateX(60deg);
+            animation: synthMove 10s linear infinite;
+        }
+        @keyframes synthMove {
+            0% { transform: rotateX(60deg) translateY(0); }
+            100% { transform: rotateX(60deg) translateY(50px); }
+        }
+        
+        /* Sun/moon gradient orb */
+        .celestial-body {
+            position: fixed;
+            top: 10%;
+            right: 10%;
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(180deg, #ff6b6b 0%, #e94560 50%, #8b2be2 100%);
+            border-radius: 50%;
+            z-index: -6;
+            opacity: 0.6;
+            box-shadow: 
+                0 0 60px rgba(233, 69, 96, 0.5),
+                0 0 120px rgba(233, 69, 96, 0.3),
+                inset 0 -20px 40px rgba(0, 0, 0, 0.3);
+            animation: celestialPulse 4s ease-in-out infinite;
+        }
+        @keyframes celestialPulse {
+            0%, 100% { transform: scale(1); opacity: 0.6; }
+            50% { transform: scale(1.05); opacity: 0.8; }
+        }
+        
+        /* Digital rain columns */
+        .digital-rain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            pointer-events: none;
+            opacity: 0.1;
+        }
+        .rain-column {
+            position: absolute;
+            top: -100%;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 14px;
+            color: #00ff88;
+            writing-mode: vertical-rl;
+            text-orientation: upright;
+            animation: rainFall linear infinite;
+        }
+        @keyframes rainFall {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(200vh); }
+        }
+        
+        /* Glitch scanline overlay */
+        .scanline-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
+            pointer-events: none;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 2px,
+                rgba(0, 0, 0, 0.03) 2px,
+                rgba(0, 0, 0, 0.03) 4px
+            );
+            animation: scanlineShift 0.1s linear infinite;
+        }
+        @keyframes scanlineShift {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(4px); }
+        }
+        
+        /* Retro loading bar */
+        .retro-bar {
+            position: relative;
+            height: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            border: 2px solid #e94560;
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+        .retro-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #e94560, #ff6b6b, #feca57);
+            width: 0%;
+            animation: retroLoad 3s ease-in-out infinite;
+            box-shadow: 0 0 20px rgba(233, 69, 96, 0.5);
+        }
+        @keyframes retroLoad {
+            0% { width: 0%; }
+            50% { width: 100%; }
+            100% { width: 0%; }
+        }
+        
+        /* Neon text flicker */
+        .neon-flicker {
+            animation: neonFlicker 2s infinite;
+        }
+        @keyframes neonFlicker {
+            0%, 100% { opacity: 1; text-shadow: 0 0 10px #e94560, 0 0 20px #e94560, 0 0 30px #e94560; }
+            10% { opacity: 0.8; }
+            20% { opacity: 1; }
+            30% { opacity: 0.9; }
+            40% { opacity: 1; }
+            50% { opacity: 0.7; }
+            60% { opacity: 1; }
+            70% { opacity: 0.95; }
+            80% { opacity: 1; }
+            90% { opacity: 0.85; }
+        }
+        
         /* Typing cursor blink */
         .typing-cursor::after {
             content: '|';
@@ -1861,6 +2002,9 @@
         </div>
     </div>
     
+    <div class="synth-grid"><div class="synth-grid-inner"></div></div>
+    <div class="celestial-body"></div>
+    <div class="digital-rain" id="digitalRain"></div>
     <div class="time-warp" id="timeWarp"></div>
     <div class="code-fragments" id="codeFragments"></div>
     <div class="quantum-field" id="quantumField"></div>
@@ -1978,8 +2122,57 @@
             </div>
             
             <div class="next-feature">
-                <div class="next-feature-label">Coming in Iteration 57</div>
-                <div class="next-feature-text">Holographic projection effects and time-warp animations...</div>
+                <div class="next-feature-label">Coming in Iteration 58</div>
+                <div class="next-feature-text">Cyberpunk cityscape and synthwave aesthetics...</div>
+            </div>
+        </div>
+        
+        <div class="card reveal">
+            <h3 class="neon-flicker">⚡ SYNTHWAVE SYSTEM STATUS</h3>
+            
+            <div style="margin: 1.5rem 0;">
+                <div style="display: flex; justify-content: space-between; font-size: 0.8rem; color: #888; margin-bottom: 0.5rem;">
+                    <span>SYSTEM INTEGRITY</span>
+                    <span style="color: #00ff88;">98.7%</span>
+                </div>
+                <div class="retro-bar">
+                    <div class="retro-fill"></div>
+                </div>
+            </div>
+            
+            <div style="margin: 1.5rem 0;">
+                <div style="display: flex; justify-content: space-between; font-size: 0.8rem; color: #888; margin-bottom: 0.5rem;">
+                    <span>NEURAL SYNC</span>
+                    <span style="color: #e94560;">RUNNING</span>
+                </div>
+                <div class="retro-bar">
+                    <div class="retro-fill" style="animation-delay: 1s;"></div>
+                </div>
+            </div>
+            
+            <div style="margin: 1.5rem 0;">
+                <div style="display: flex; justify-content: space-between; font-size: 0.8rem; color: #888; margin-bottom: 0.5rem;">
+                    <span>DATA STREAM</span>
+                    <span style="color: #feca57;">ACTIVE</span>
+                </div>
+                <div class="retro-bar">
+                    <div class="retro-fill" style="animation-delay: 2s;"></div>
+                </div>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1.5rem; text-align: center;">
+                <div style="padding: 1rem; background: rgba(233, 69, 96, 0.1); border-radius: 8px; border: 1px solid rgba(233, 69, 96, 0.3);">
+                    <div style="font-size: 1.5rem; color: #e94560; font-weight: bold;">57</div>
+                    <div style="font-size: 0.7rem; color: #888;">ITERATIONS</div>
+                </div>
+                <div style="padding: 1rem; background: rgba(0, 255, 136, 0.1); border-radius: 8px; border: 1px solid rgba(0, 255, 136, 0.3);">
+                    <div style="font-size: 1.5rem; color: #00ff88; font-weight: bold;">∞</div>
+                    <div style="font-size: 0.7rem; color: #888;">POTENTIAL</div>
+                </div>
+                <div style="padding: 1rem; background: rgba(254, 202, 87, 0.1); border-radius: 8px; border: 1px solid rgba(254, 202, 87, 0.3);">
+                    <div style="font-size: 1.5rem; color: #feca57; font-weight: bold;">100%</div>
+                    <div style="font-size: 0.7rem; color: #888;">AUTONOMY</div>
+                </div>
             </div>
         </div>
         
@@ -2154,6 +2347,10 @@
             <h3>📜 Live Build Log</h3>
             <div class="commit-graph" id="commitGraph"></div>
             <div class="changelog">
+                <div class="changelog-item">
+                    <span class="changelog-time">20:29</span>
+                    <span class="changelog-text">Iteration 57: Added synthwave grid floor, celestial sun body, digital rain effect, neon flickering text, retro loading bars, and cyberpunk system status panel</span>
+                </div>
                 <div class="changelog-item">
                     <span class="changelog-time">17:29</span>
                     <span class="changelog-text">Iteration 56: Added time-warp tunnel effect, floating code fragments, holographic projection layers, interactive gravity well, and pulse wave effects</span>
@@ -2367,7 +2564,7 @@
         
         <div class="footer reveal">
             <p>Built with ❤️‍🔥 by <a href="https://github.com/openclaw/openclaw">OpenClaw</a></p>
-            <p style="margin-top: 0.5rem;">Last updated: 2026-03-01 17:29</p>
+            <p style="margin-top: 0.5rem;">Last updated: 2026-03-01 20:29</p>
         </div>
     </div>
     
@@ -2620,7 +2817,7 @@
         // Generate commit graph
         const commitGraph = document.getElementById('commitGraph');
         const totalCells = 60;
-        const activeCells = 56; // Number of iterations so far
+        const activeCells = 57; // Number of iterations so far
         
         for (let i = 0; i < totalCells; i++) {
             const cell = document.createElement('div');
@@ -2706,7 +2903,7 @@
         setTimeout(showUpdateToast, 2000);
         
         // Update page title with iteration count
-        document.title = `Clawd — ${56} Iterations of AI Evolution`;
+        document.title = `Clawd — ${57} Iterations of AI Evolution`;
         
         // Neural network background
         function createNeuralNetwork() {
@@ -2902,6 +3099,32 @@
         }
         createHeatmap();
         
+        // Digital rain effect
+        function createDigitalRain() {
+            const container = document.getElementById('digitalRain');
+            if (!container) return;
+            
+            const chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
+            const columnCount = Math.floor(window.innerWidth / 20);
+            
+            for (let i = 0; i < columnCount; i++) {
+                const column = document.createElement('div');
+                column.className = 'rain-column';
+                column.style.left = (i * 20) + 'px';
+                column.style.animationDuration = (5 + Math.random() * 10) + 's';
+                column.style.animationDelay = Math.random() * 5 + 's';
+                
+                let text = '';
+                const length = 10 + Math.floor(Math.random() * 20);
+                for (let j = 0; j < length; j++) {
+                    text += chars[Math.floor(Math.random() * chars.length)];
+                }
+                column.textContent = text;
+                container.appendChild(column);
+            }
+        }
+        createDigitalRain();
+        
         // Time warp effect
         function createTimeWarp() {
             const timeWarp = document.getElementById('timeWarp');
@@ -3042,7 +3265,7 @@
         // Animate iteration counter on load
         setTimeout(() => {
             const counter = document.getElementById('iterationCounter');
-            if (counter) animateCounter(counter, 56);
+            if (counter) animateCounter(counter, 57);
         }, 2000);
         
         // 3D Tilt effect for cards
