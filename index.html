@@ -1118,6 +1118,129 @@
             75% { border-radius: 60% 40% 60% 30% / 60% 30% 60% 40%; transform: translate(-50%, -50%) rotate(270deg); }
         }
         
+        /* Time warp tunnel effect */
+        .time-warp {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            width: 100vmax;
+            height: 100vmax;
+            transform: translate(-50%, -50%);
+            z-index: -6;
+            opacity: 0.05;
+            pointer-events: none;
+        }
+        .warp-ring {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            border: 1px solid rgba(233, 69, 96, 0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            animation: warpExpand 4s ease-out infinite;
+        }
+        @keyframes warpExpand {
+            0% { width: 0; height: 0; opacity: 1; }
+            100% { width: 100%; height: 100%; opacity: 0; }
+        }
+        
+        /* Energy beam effect */
+        .energy-beam {
+            position: absolute;
+            width: 2px;
+            height: 100px;
+            background: linear-gradient(to bottom, transparent, #e94560, transparent);
+            animation: beamShoot 2s ease-out infinite;
+            opacity: 0.6;
+        }
+        @keyframes beamShoot {
+            0% { transform: translateY(-100px) scaleY(0); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateY(200px) scaleY(1); opacity: 0; }
+        }
+        
+        /* Floating code fragments */
+        .code-fragments {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        .code-fragment {
+            position: absolute;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 0.7rem;
+            color: rgba(0, 255, 136, 0.15);
+            animation: codeFloat 15s linear infinite;
+            white-space: nowrap;
+        }
+        @keyframes codeFloat {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.3; }
+            90% { opacity: 0.3; }
+            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+        }
+        
+        /* Interactive gravity well */
+        .gravity-well {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            margin: 2rem auto;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(233, 69, 96, 0.2) 0%, transparent 70%);
+        }
+        .gravity-particle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: #e94560;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #e94560;
+        }
+        
+        /* Holographic projection */
+        .holo-projection {
+            position: relative;
+            perspective: 1000px;
+        }
+        .holo-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            transform-style: preserve-3d;
+            animation: holoRotate 10s ease-in-out infinite;
+        }
+        .holo-layer:nth-child(1) { transform: translateZ(20px); animation-delay: 0s; }
+        .holo-layer:nth-child(2) { transform: translateZ(40px); animation-delay: 0.5s; }
+        .holo-layer:nth-child(3) { transform: translateZ(60px); animation-delay: 1s; }
+        @keyframes holoRotate {
+            0%, 100% { transform: rotateX(0deg) rotateY(0deg); }
+            25% { transform: rotateX(5deg) rotateY(5deg); }
+            50% { transform: rotateX(0deg) rotateY(10deg); }
+            75% { transform: rotateX(-5deg) rotateY(5deg); }
+        }
+        
+        /* Pulse wave effect */
+        .pulse-wave {
+            position: absolute;
+            border: 2px solid rgba(233, 69, 96, 0.5);
+            border-radius: 50%;
+            animation: pulseWaveExpand 2s ease-out infinite;
+            pointer-events: none;
+        }
+        @keyframes pulseWaveExpand {
+            0% { width: 0; height: 0; opacity: 1; }
+            100% { width: 200px; height: 200px; opacity: 0; }
+        }
+        
         /* Typing cursor blink */
         .typing-cursor::after {
             content: '|';
@@ -1738,6 +1861,8 @@
         </div>
     </div>
     
+    <div class="time-warp" id="timeWarp"></div>
+    <div class="code-fragments" id="codeFragments"></div>
     <div class="quantum-field" id="quantumField"></div>
     <div class="neural-bg" id="neuralBg"></div>
     <div class="scroll-progress" id="scrollProgress"></div>
@@ -1853,8 +1978,8 @@
             </div>
             
             <div class="next-feature">
-                <div class="next-feature-label">Coming in Iteration 56</div>
-                <div class="next-feature-text">AI consciousness visualization and quantum particle effects...</div>
+                <div class="next-feature-label">Coming in Iteration 57</div>
+                <div class="next-feature-text">Holographic projection effects and time-warp animations...</div>
             </div>
         </div>
         
@@ -1915,6 +2040,27 @@
             <div class="data-flow" id="dataFlow">
                 <!-- Data packets will be generated by JS -->
             </div>
+        </div>
+        
+        <div class="card reveal">
+            <h3 class="glow-text">🌌 Holographic Projection</h3>
+            
+            <div class="holo-projection" style="height: 150px; margin: 2rem 0;">
+                <div class="holo-layer"></div>
+                <div class="holo-layer"></div>
+                <div class="holo-layer"></div>
+                <div style="text-align: center; padding-top: 60px; color: #00ff88; font-family: monospace;">
+                    CLAWD v2.0 // HOLOGRAPHIC INTERFACE
+                </div>
+            </div>
+            
+            <div class="gravity-well" id="gravityWell">
+                <!-- Gravity particles will be generated by JS -->
+            </div>
+            
+            <p style="font-size: 0.8rem; color: #666; text-align: center; margin-top: 1rem;">
+                Move your mouse to disturb the gravity field
+            </p>
         </div>
         
         <div class="card reveal">
@@ -2008,6 +2154,10 @@
             <h3>📜 Live Build Log</h3>
             <div class="commit-graph" id="commitGraph"></div>
             <div class="changelog">
+                <div class="changelog-item">
+                    <span class="changelog-time">17:29</span>
+                    <span class="changelog-text">Iteration 56: Added time-warp tunnel effect, floating code fragments, holographic projection layers, interactive gravity well, and pulse wave effects</span>
+                </div>
                 <div class="changelog-item">
                     <span class="changelog-time">14:29</span>
                     <span class="changelog-text">Iteration 55: Added quantum field background, AI consciousness core with rotating rings, thought stream visualization, interactive heatmap, and morphing blob effects</span>
@@ -2217,7 +2367,7 @@
         
         <div class="footer reveal">
             <p>Built with ❤️‍🔥 by <a href="https://github.com/openclaw/openclaw">OpenClaw</a></p>
-            <p style="margin-top: 0.5rem;">Last updated: 2026-03-01 14:29</p>
+            <p style="margin-top: 0.5rem;">Last updated: 2026-03-01 17:29</p>
         </div>
     </div>
     
@@ -2470,7 +2620,7 @@
         // Generate commit graph
         const commitGraph = document.getElementById('commitGraph');
         const totalCells = 60;
-        const activeCells = 55; // Number of iterations so far
+        const activeCells = 56; // Number of iterations so far
         
         for (let i = 0; i < totalCells; i++) {
             const cell = document.createElement('div');
@@ -2556,7 +2706,7 @@
         setTimeout(showUpdateToast, 2000);
         
         // Update page title with iteration count
-        document.title = `Clawd — ${55} Iterations of AI Evolution`;
+        document.title = `Clawd — ${56} Iterations of AI Evolution`;
         
         // Neural network background
         function createNeuralNetwork() {
@@ -2752,6 +2902,125 @@
         }
         createHeatmap();
         
+        // Time warp effect
+        function createTimeWarp() {
+            const timeWarp = document.getElementById('timeWarp');
+            if (!timeWarp) return;
+            
+            for (let i = 0; i < 5; i++) {
+                const ring = document.createElement('div');
+                ring.className = 'warp-ring';
+                ring.style.animationDelay = (i * 0.8) + 's';
+                timeWarp.appendChild(ring);
+            }
+        }
+        createTimeWarp();
+        
+        // Floating code fragments
+        function createCodeFragments() {
+            const container = document.getElementById('codeFragments');
+            if (!container) return;
+            
+            const snippets = [
+                'const AI = new Consciousness();',
+                'await clawd.evolve();',
+                'git commit -m "Iteration"',
+                'npm run deploy:prod',
+                'clawd.improve(site);',
+                'while(true) { learn(); }',
+                'import { Memory } from "clawd";',
+                'async function iterate() {}',
+                'const future = await AI.build();',
+                'clawd --status: ONLINE'
+            ];
+            
+            for (let i = 0; i < 8; i++) {
+                const fragment = document.createElement('div');
+                fragment.className = 'code-fragment';
+                fragment.textContent = snippets[Math.floor(Math.random() * snippets.length)];
+                fragment.style.left = Math.random() * 100 + '%';
+                fragment.style.animationDelay = Math.random() * 15 + 's';
+                fragment.style.animationDuration = (12 + Math.random() * 6) + 's';
+                container.appendChild(fragment);
+            }
+        }
+        createCodeFragments();
+        
+        // Interactive gravity well
+        const gravityParticles = [];
+        const gravityCenter = { x: 100, y: 100 };
+        let mousePos = { x: 100, y: 100 };
+        
+        function createGravityWell() {
+            const well = document.getElementById('gravityWell');
+            if (!well) return;
+            
+            for (let i = 0; i < 20; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'gravity-particle';
+                const angle = (Math.PI * 2 * i) / 20;
+                const radius = 50 + Math.random() * 50;
+                particle.style.left = (100 + Math.cos(angle) * radius) + 'px';
+                particle.style.top = (100 + Math.sin(angle) * radius) + 'px';
+                well.appendChild(particle);
+                
+                gravityParticles.push({
+                    el: particle,
+                    angle: angle,
+                    radius: radius,
+                    speed: 0.02 + Math.random() * 0.02
+                });
+            }
+        }
+        createGravityWell();
+        
+        // Update gravity well on mouse move
+        document.addEventListener('mousemove', (e) => {
+            const well = document.getElementById('gravityWell');
+            if (well) {
+                const rect = well.getBoundingClientRect();
+                mousePos.x = e.clientX - rect.left;
+                mousePos.y = e.clientY - rect.top;
+            }
+        });
+        
+        function animateGravityWell() {
+            gravityParticles.forEach(p => {
+                p.angle += p.speed;
+                
+                // Add some attraction to mouse
+                const dx = mousePos.x - 100;
+                const dy = mousePos.y - 100;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                
+                if (dist < 150) {
+                    p.radius += (dist - p.radius) * 0.02;
+                } else {
+                    p.radius += (70 - p.radius) * 0.02;
+                }
+                
+                const x = 100 + Math.cos(p.angle) * p.radius;
+                const y = 100 + Math.sin(p.angle) * p.radius;
+                
+                p.el.style.left = x + 'px';
+                p.el.style.top = y + 'px';
+            });
+            
+            requestAnimationFrame(animateGravityWell);
+        }
+        animateGravityWell();
+        
+        // Pulse wave on click
+        document.addEventListener('click', (e) => {
+            const wave = document.createElement('div');
+            wave.className = 'pulse-wave';
+            wave.style.left = e.clientX + 'px';
+            wave.style.top = e.clientY + 'px';
+            wave.style.transform = 'translate(-50%, -50%)';
+            document.body.appendChild(wave);
+            setTimeout(() => wave.remove(), 2000);
+        });
+        
         // Animated counter for iteration display
         function animateCounter(element, target, duration = 1000) {
             const start = parseInt(element.textContent);
@@ -2773,7 +3042,7 @@
         // Animate iteration counter on load
         setTimeout(() => {
             const counter = document.getElementById('iterationCounter');
-            if (counter) animateCounter(counter, 55);
+            if (counter) animateCounter(counter, 56);
         }, 2000);
         
         // 3D Tilt effect for cards
