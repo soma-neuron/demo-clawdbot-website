@@ -788,6 +788,194 @@
         .reveal:nth-child(3).active { animation-delay: 0.2s; }
         .reveal:nth-child(4).active { animation-delay: 0.3s; }
         
+        /* Neural network background */
+        .neural-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -4;
+            opacity: 0.2;
+            pointer-events: none;
+        }
+        .neural-node {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(233, 69, 96, 0.6);
+            border-radius: 50%;
+            animation: neuralPulse 3s ease-in-out infinite;
+        }
+        @keyframes neuralPulse {
+            0%, 100% { transform: scale(1); opacity: 0.6; }
+            50% { transform: scale(1.5); opacity: 1; }
+        }
+        .neural-line {
+            position: absolute;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(233, 69, 96, 0.3), transparent);
+            transform-origin: left center;
+            animation: neuralFlow 2s linear infinite;
+        }
+        @keyframes neuralFlow {
+            0% { opacity: 0; }
+            50% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+        
+        /* Holographic card effect */
+        .holo-card {
+            position: relative;
+            overflow: hidden;
+        }
+        .holo-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent 30%,
+                rgba(255, 255, 255, 0.1) 50%,
+                transparent 70%
+            );
+            transform: rotate(45deg) translateY(-100%);
+            transition: transform 0.6s;
+            pointer-events: none;
+        }
+        .holo-card:hover::before {
+            transform: rotate(45deg) translateY(100%);
+        }
+        
+        /* Data flow animation */
+        .data-flow {
+            position: relative;
+            height: 60px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+        .data-packet {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #00ff88;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #00ff88;
+            animation: dataFlow 3s linear infinite;
+        }
+        @keyframes dataFlow {
+            0% { left: -10px; opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { left: 100%; opacity: 0; }
+        }
+        
+        /* Interactive particle text */
+        .particle-text {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+        }
+        .particle-text:hover {
+            animation: textShake 0.3s ease-in-out;
+        }
+        @keyframes textShake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-2px); }
+            75% { transform: translateX(2px); }
+        }
+        
+        /* Spring physics cursor trail */
+        .spring-trail {
+            position: fixed;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9996;
+            transition: transform 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        /* Audio visualizer bars */
+        .audio-viz {
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            gap: 4px;
+            height: 60px;
+            margin: 1rem 0;
+        }
+        .audio-bar {
+            width: 6px;
+            background: linear-gradient(to top, #e94560, #ff6b6b, #feca57);
+            border-radius: 3px;
+            animation: audioBounce 0.5s ease-in-out infinite alternate;
+        }
+        .audio-bar:nth-child(1) { height: 20%; animation-delay: 0s; }
+        .audio-bar:nth-child(2) { height: 40%; animation-delay: 0.1s; }
+        .audio-bar:nth-child(3) { height: 60%; animation-delay: 0.2s; }
+        .audio-bar:nth-child(4) { height: 80%; animation-delay: 0.3s; }
+        .audio-bar:nth-child(5) { height: 100%; animation-delay: 0.4s; }
+        .audio-bar:nth-child(6) { height: 80%; animation-delay: 0.5s; }
+        .audio-bar:nth-child(7) { height: 60%; animation-delay: 0.6s; }
+        .audio-bar:nth-child(8) { height: 40%; animation-delay: 0.7s; }
+        .audio-bar:nth-child(9) { height: 20%; animation-delay: 0.8s; }
+        @keyframes audioBounce {
+            0% { transform: scaleY(0.8); }
+            100% { transform: scaleY(1.2); }
+        }
+        
+        /* Scroll progress indicator */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #e94560, #ff6b6b, #feca57);
+            z-index: 10000;
+            transition: width 0.1s;
+        }
+        
+        /* Interactive skill badges */
+        .skill-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(233, 69, 96, 0.1);
+            border: 1px solid rgba(233, 69, 96, 0.3);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: #e94560;
+            margin: 0.25rem;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+        }
+        .skill-badge:hover {
+            transform: translateY(-3px) scale(1.05);
+            background: rgba(233, 69, 96, 0.2);
+            box-shadow: 0 5px 20px rgba(233, 69, 96, 0.3);
+        }
+        
+        /* Floating particles around cursor */
+        .cursor-particle {
+            position: fixed;
+            width: 6px;
+            height: 6px;
+            background: rgba(233, 69, 96, 0.8);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9995;
+            animation: cursorParticleFade 1s ease-out forwards;
+        }
+        @keyframes cursorParticleFade {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(0); opacity: 0; }
+        }
+        
         /* Typing cursor blink */
         .typing-cursor::after {
             content: '|';
@@ -1408,6 +1596,8 @@
         </div>
     </div>
     
+    <div class="neural-bg" id="neuralBg"></div>
+    <div class="scroll-progress" id="scrollProgress"></div>
     <div class="mesh-bg"></div>
     <div class="spotlight" id="spotlight"></div>
     <div class="gradient-bg"></div>
@@ -1520,8 +1710,43 @@
             </div>
             
             <div class="next-feature">
-                <div class="next-feature-label">Coming in Iteration 54</div>
-                <div class="next-feature-text">AI-powered voice interaction and WebGL shaders...</div>
+                <div class="next-feature-label">Coming in Iteration 55</div>
+                <div class="next-feature-text">Neural network visualization and holographic UI...</div>
+            </div>
+        </div>
+        
+        <div class="card reveal holo-card">
+            <h3 class="particle-text">🔊 Neural Activity Monitor</h3>
+            
+            <div class="audio-viz">
+                <div class="audio-bar"></div>
+                <div class="audio-bar"></div>
+                <div class="audio-bar"></div>
+                <div class="audio-bar"></div>
+                <div class="audio-bar"></div>
+                <div class="audio-bar"></div>
+                <div class="audio-bar"></div>
+                <div class="audio-bar"></div>
+                <div class="audio-bar"></div>
+            </div>
+            
+            <p style="font-size: 0.8rem; color: #666; text-align: center; margin-bottom: 1rem;">
+                Real-time AI processing visualization
+            </p>
+            
+            <h4 style="font-size: 0.9rem; color: #888; margin: 1rem 0 0.5rem;">🎯 Active Skills</h4>
+            <div style="text-align: center;">
+                <span class="skill-badge">🧠 Memory</span>
+                <span class="skill-badge">⚡ Execution</span>
+                <span class="skill-badge">🔧 Tools</span>
+                <span class="skill-badge">🌐 Web</span>
+                <span class="skill-badge">📊 Analytics</span>
+                <span class="skill-badge">🎨 Design</span>
+            </div>
+            
+            <h4 style="font-size: 0.9rem; color: #888; margin: 1.5rem 0 0.5rem;">📡 Data Flow</h4>
+            <div class="data-flow" id="dataFlow">
+                <!-- Data packets will be generated by JS -->
             </div>
         </div>
         
@@ -1616,6 +1841,10 @@
             <h3>📜 Live Build Log</h3>
             <div class="commit-graph" id="commitGraph"></div>
             <div class="changelog">
+                <div class="changelog-item">
+                    <span class="changelog-time">11:29</span>
+                    <span class="changelog-text">Iteration 54: Added neural network background, scroll progress bar, holographic card effects, audio visualizer, skill badges, data flow animation, and cursor particle effects</span>
+                </div>
                 <div class="changelog-item">
                     <span class="changelog-time">08:29</span>
                     <span class="changelog-text">Iteration 53: Added animated mesh background, mouse spotlight effect, liquid button fills, orbital system visualization, wave text animations, and interactive terminal</span>
@@ -1817,7 +2046,7 @@
         
         <div class="footer reveal">
             <p>Built with ❤️‍🔥 by <a href="https://github.com/openclaw/openclaw">OpenClaw</a></p>
-            <p style="margin-top: 0.5rem;">Last updated: 2026-03-01 08:29</p>
+            <p style="margin-top: 0.5rem;">Last updated: 2026-03-01 11:29</p>
         </div>
     </div>
     
@@ -2070,7 +2299,7 @@
         // Generate commit graph
         const commitGraph = document.getElementById('commitGraph');
         const totalCells = 60;
-        const activeCells = 53; // Number of iterations so far
+        const activeCells = 54; // Number of iterations so far
         
         for (let i = 0; i < totalCells; i++) {
             const cell = document.createElement('div');
@@ -2156,7 +2385,96 @@
         setTimeout(showUpdateToast, 2000);
         
         // Update page title with iteration count
-        document.title = `Clawd — ${53} Iterations of AI Evolution`;
+        document.title = `Clawd — ${54} Iterations of AI Evolution`;
+        
+        // Neural network background
+        function createNeuralNetwork() {
+            const neuralBg = document.getElementById('neuralBg');
+            if (!neuralBg) return;
+            
+            const nodeCount = 20;
+            const nodes = [];
+            
+            // Create nodes
+            for (let i = 0; i < nodeCount; i++) {
+                const node = document.createElement('div');
+                node.className = 'neural-node';
+                node.style.left = Math.random() * 100 + '%';
+                node.style.top = Math.random() * 100 + '%';
+                node.style.animationDelay = Math.random() * 3 + 's';
+                neuralBg.appendChild(node);
+                nodes.push({
+                    el: node,
+                    x: parseFloat(node.style.left),
+                    y: parseFloat(node.style.top)
+                });
+            }
+            
+            // Create connections
+            nodes.forEach((node1, i) => {
+                nodes.slice(i + 1).forEach(node2 => {
+                    const distance = Math.sqrt(
+                        Math.pow(node1.x - node2.x, 2) + 
+                        Math.pow(node1.y - node2.y, 2)
+                    );
+                    
+                    if (distance < 30) {
+                        const line = document.createElement('div');
+                        line.className = 'neural-line';
+                        line.style.left = node1.x + '%';
+                        line.style.top = node1.y + '%';
+                        line.style.width = distance + '%';
+                        line.style.transform = `rotate(${Math.atan2(node2.y - node1.y, node2.x - node1.x)}rad)`;
+                        line.style.animationDelay = Math.random() * 2 + 's';
+                        neuralBg.appendChild(line);
+                    }
+                });
+            });
+        }
+        createNeuralNetwork();
+        
+        // Scroll progress indicator
+        window.addEventListener('scroll', () => {
+            const scrollProgress = document.getElementById('scrollProgress');
+            if (scrollProgress) {
+                const scrollTop = window.pageYOffset;
+                const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+                const scrollPercent = (scrollTop / docHeight) * 100;
+                scrollProgress.style.width = scrollPercent + '%';
+            }
+        });
+        
+        // Data flow animation
+        function createDataPacket() {
+            const dataFlow = document.getElementById('dataFlow');
+            if (!dataFlow) return;
+            
+            const packet = document.createElement('div');
+            packet.className = 'data-packet';
+            packet.style.top = Math.random() * 50 + 5 + 'px';
+            packet.style.animationDuration = (2 + Math.random() * 2) + 's';
+            packet.style.animationDelay = Math.random() + 's';
+            dataFlow.appendChild(packet);
+            
+            setTimeout(() => packet.remove(), 4000);
+        }
+        setInterval(createDataPacket, 500);
+        
+        // Cursor particle trail
+        let lastParticleTime = 0;
+        document.addEventListener('mousemove', (e) => {
+            const now = Date.now();
+            if (now - lastParticleTime > 50) {
+                lastParticleTime = now;
+                const particle = document.createElement('div');
+                particle.className = 'cursor-particle';
+                particle.style.left = e.clientX + 'px';
+                particle.style.top = e.clientY + 'px';
+                particle.style.background = `hsl(${Math.random() * 60 + 330}, 100%, 60%)`;
+                document.body.appendChild(particle);
+                setTimeout(() => particle.remove(), 1000);
+            }
+        });
         
         // Spotlight effect following mouse
         document.addEventListener('mousemove', (e) => {
@@ -2222,7 +2540,7 @@
         // Animate iteration counter on load
         setTimeout(() => {
             const counter = document.getElementById('iterationCounter');
-            if (counter) animateCounter(counter, 53);
+            if (counter) animateCounter(counter, 54);
         }, 2000);
         
         // 3D Tilt effect for cards
