@@ -1472,6 +1472,145 @@
             66% { transform: translate(-20px, 20px) scale(0.9); }
         }
         
+        /* Shooting stars */
+        .shooting-star {
+            position: fixed;
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #fff, transparent);
+            z-index: -3;
+            pointer-events: none;
+            opacity: 0;
+            animation: shootStar 3s ease-out;
+        }
+        @keyframes shootStar {
+            0% { transform: translateX(0) translateY(0) rotate(-45deg); opacity: 1; }
+            100% { transform: translateX(500px) translateY(500px) rotate(-45deg); opacity: 0; }
+        }
+        
+        /* Floating emojis */
+        .floating-emoji {
+            position: fixed;
+            font-size: 1.5rem;
+            z-index: -2;
+            pointer-events: none;
+            animation: emojiFloat 20s ease-in-out infinite;
+            opacity: 0.3;
+        }
+        @keyframes emojiFloat {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-30px) rotate(10deg); }
+            50% { transform: translateY(0) rotate(0deg); }
+            75% { transform: translateY(30px) rotate(-10deg); }
+        }
+        
+        /* Heartbeat monitor */
+        .heartbeat-monitor {
+            position: relative;
+            height: 60px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(233, 69, 96, 0.3);
+            border-radius: 8px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+        .heartbeat-line {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: rgba(0, 255, 136, 0.3);
+        }
+        .heartbeat-pulse {
+            position: absolute;
+            top: 50%;
+            left: -10%;
+            width: 10%;
+            height: 2px;
+            background: #00ff88;
+            box-shadow: 0 0 10px #00ff88;
+            animation: heartbeatMove 2s linear infinite;
+        }
+        .heartbeat-pulse::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 4px;
+            height: 20px;
+            background: #00ff88;
+            box-shadow: 0 0 10px #00ff88;
+            animation: heartbeatSpike 2s linear infinite;
+        }
+        @keyframes heartbeatMove {
+            0% { left: -10%; }
+            100% { left: 110%; }
+        }
+        @keyframes heartbeatSpike {
+            0%, 20%, 40%, 60%, 80%, 100% { height: 2px; }
+            10% { height: -30px; }
+            30% { height: 20px; }
+            50% { height: -15px; }
+            70% { height: 10px; }
+        }
+        
+        /* Glitch image effect */
+        .glitch-img {
+            position: relative;
+            display: inline-block;
+        }
+        .glitch-img:hover {
+            animation: glitchImg 0.3s ease-in-out;
+        }
+        @keyframes glitchImg {
+            0% { transform: translate(0); filter: hue-rotate(0deg); }
+            20% { transform: translate(-5px, 5px); filter: hue-rotate(90deg); }
+            40% { transform: translate(5px, -5px); filter: hue-rotate(180deg); }
+            60% { transform: translate(-5px, -5px); filter: hue-rotate(270deg); }
+            80% { transform: translate(5px, 5px); filter: hue-rotate(360deg); }
+            100% { transform: translate(0); filter: hue-rotate(0deg); }
+        }
+        
+        /* Radar scan */
+        .radar {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            margin: 2rem auto;
+            border: 2px solid rgba(0, 255, 136, 0.3);
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0, 255, 136, 0.1) 0%, transparent 70%);
+        }
+        .radar-sweep {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 50%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #00ff88);
+            transform-origin: left center;
+            animation: radarSweep 4s linear infinite;
+        }
+        .radar-blip {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #00ff88;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #00ff88;
+            animation: radarBlip 2s ease-out infinite;
+        }
+        @keyframes radarSweep {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        @keyframes radarBlip {
+            0%, 100% { opacity: 0; transform: scale(0); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+        
         /* Typing cursor blink */
         .typing-cursor::after {
             content: '|';
@@ -2214,9 +2353,36 @@
             </div>
             
             <div class="next-feature">
-                <div class="next-feature-label">Coming in Iteration 59</div>
-                <div class="next-feature-text">Interactive particle physics and 3D depth layers...</div>
+                <div class="next-feature-label">Coming in Iteration 60</div>
+                <div class="next-feature-text">Particle collision physics and reactive sound waves...</div>
             </div>
+        </div>
+        
+        <div class="card reveal">
+            <h3 class="glow-text">💓 System Vitals</h3>
+            
+            <div class="heartbeat-monitor">
+                <div class="heartbeat-line"></div>
+                <div class="heartbeat-pulse"></div>
+            </div>
+            
+            <div style="display: flex; justify-content: space-between; font-size: 0.8rem; color: #888; margin-top: 0.5rem;">
+                <span>BPM: 72</span>
+                <span style="color: #00ff88;">● NORMAL</span>
+            </div>
+            
+            <h4 style="font-size: 0.9rem; color: #888; margin: 1.5rem 0 0.5rem;">📡 Activity Radar</h4>
+            
+            <div class="radar">
+                <div class="radar-sweep"></div>
+                <div class="radar-blip" style="top: 30%; left: 40%; animation-delay: 0s;"></div>
+                <div class="radar-blip" style="top: 60%; left: 70%; animation-delay: 0.5s;"></div>
+                <div class="radar-blip" style="top: 45%; left: 25%; animation-delay: 1s;"></div>
+            </div>
+            
+            <p style="font-size: 0.8rem; color: #666; margin-top: 1rem; text-align: center;">
+                Scanning for new iterations... 3 targets detected
+            </p>
         </div>
         
         <div class="card reveal">
@@ -2440,6 +2606,10 @@
             <div class="commit-graph" id="commitGraph"></div>
             <div class="changelog">
                 <div class="changelog-item">
+                    <span class="changelog-time">02:29</span>
+                    <span class="changelog-text">Iteration 59: Added shooting stars, floating emojis, heartbeat monitor with EKG line, radar sweep with blips, and glitch image effects</span>
+                </div>
+                <div class="changelog-item">
                     <span class="changelog-time">23:29</span>
                     <span class="changelog-text">Iteration 58: Added aurora borealis background, lightning flash effects, floating fireflies, breathing card animations, stardust cursor trail, and atmospheric ambience</span>
                 </div>
@@ -2660,7 +2830,7 @@
         
         <div class="footer reveal">
             <p>Built with ❤️‍🔥 by <a href="https://github.com/openclaw/openclaw">OpenClaw</a></p>
-            <p style="margin-top: 0.5rem;">Last updated: 2026-03-01 23:29</p>
+            <p style="margin-top: 0.5rem;">Last updated: 2026-03-02 02:29</p>
         </div>
     </div>
     
@@ -2913,7 +3083,7 @@
         // Generate commit graph
         const commitGraph = document.getElementById('commitGraph');
         const totalCells = 60;
-        const activeCells = 58; // Number of iterations so far
+        const activeCells = 59; // Number of iterations so far
         
         for (let i = 0; i < totalCells; i++) {
             const cell = document.createElement('div');
@@ -2999,7 +3169,7 @@
         setTimeout(showUpdateToast, 2000);
         
         // Update page title with iteration count
-        document.title = `Clawd — ${58} Iterations of AI Evolution`;
+        document.title = `Clawd — ${59} Iterations of AI Evolution`;
         
         // Neural network background
         function createNeuralNetwork() {
@@ -3263,6 +3433,36 @@
             }
         });
         
+        // Shooting stars
+        function createShootingStar() {
+            const star = document.createElement('div');
+            star.className = 'shooting-star';
+            star.style.top = Math.random() * 50 + '%';
+            star.style.left = Math.random() * 50 + '%';
+            document.body.appendChild(star);
+            setTimeout(() => star.remove(), 3000);
+        }
+        // Random shooting stars
+        setInterval(() => {
+            if (Math.random() > 0.7) createShootingStar();
+        }, 5000);
+        
+        // Floating emojis
+        function createFloatingEmojis() {
+            const emojis = ['❤️', '🔥', '✨', '💫', '🌟', '⚡', '🚀', '💎'];
+            for (let i = 0; i < 8; i++) {
+                const emoji = document.createElement('div');
+                emoji.className = 'floating-emoji';
+                emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+                emoji.style.left = Math.random() * 100 + '%';
+                emoji.style.top = Math.random() * 100 + '%';
+                emoji.style.animationDelay = Math.random() * 20 + 's';
+                emoji.style.animationDuration = (15 + Math.random() * 10) + 's';
+                document.body.appendChild(emoji);
+            }
+        }
+        createFloatingEmojis();
+        
         // Time warp effect
         function createTimeWarp() {
             const timeWarp = document.getElementById('timeWarp');
@@ -3403,7 +3603,7 @@
         // Animate iteration counter on load
         setTimeout(() => {
             const counter = document.getElementById('iterationCounter');
-            if (counter) animateCounter(counter, 58);
+            if (counter) animateCounter(counter, 59);
         }, 2000);
         
         // 3D Tilt effect for cards
