@@ -1382,6 +1382,96 @@
             90% { opacity: 0.85; }
         }
         
+        /* Lightning flash effect */
+        .lightning-flash {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            z-index: 9998;
+            pointer-events: none;
+            opacity: 0;
+        }
+        .lightning-flash.active {
+            animation: lightning 0.2s ease-out;
+        }
+        @keyframes lightning {
+            0% { opacity: 0; }
+            10% { opacity: 0.8; }
+            20% { opacity: 0; }
+            30% { opacity: 0.4; }
+            100% { opacity: 0; }
+        }
+        
+        /* Fireflies */
+        .firefly {
+            position: fixed;
+            width: 4px;
+            height: 4px;
+            background: #feca57;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #feca57, 0 0 20px #feca57;
+            z-index: -3;
+            pointer-events: none;
+            animation: fireflyFloat 15s ease-in-out infinite;
+        }
+        @keyframes fireflyFloat {
+            0%, 100% { transform: translate(0, 0); opacity: 0; }
+            10% { opacity: 1; }
+            25% { transform: translate(100px, -50px); }
+            50% { transform: translate(-50px, -100px); }
+            75% { transform: translate(-100px, 50px); }
+            90% { opacity: 1; }
+        }
+        
+        /* Breathing cards */
+        .breathing-card {
+            animation: cardBreathe 4s ease-in-out infinite;
+        }
+        @keyframes cardBreathe {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 20px rgba(233, 69, 96, 0.1); }
+            50% { transform: scale(1.01); box-shadow: 0 0 40px rgba(233, 69, 96, 0.2); }
+        }
+        
+        /* Stardust trail */
+        .stardust {
+            position: fixed;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9994;
+            animation: stardustFade 2s ease-out forwards;
+        }
+        @keyframes stardustFade {
+            0% { transform: scale(1); opacity: 1; box-shadow: 0 0 4px white; }
+            100% { transform: scale(0); opacity: 0; }
+        }
+        
+        /* Aurora background */
+        .aurora {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -8;
+            background: 
+                radial-gradient(ellipse at 20% 20%, rgba(0, 255, 136, 0.1) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(233, 69, 96, 0.1) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(79, 172, 254, 0.1) 0%, transparent 70%);
+            animation: auroraShift 20s ease-in-out infinite;
+            opacity: 0.5;
+        }
+        @keyframes auroraShift {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -30px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+        }
+        
         /* Typing cursor blink */
         .typing-cursor::after {
             content: '|';
@@ -2002,6 +2092,8 @@
         </div>
     </div>
     
+    <div class="lightning-flash" id="lightningFlash"></div>
+    <div class="aurora"></div>
     <div class="synth-grid"><div class="synth-grid-inner"></div></div>
     <div class="celestial-body"></div>
     <div class="digital-rain" id="digitalRain"></div>
@@ -2122,8 +2214,8 @@
             </div>
             
             <div class="next-feature">
-                <div class="next-feature-label">Coming in Iteration 58</div>
-                <div class="next-feature-text">Cyberpunk cityscape and synthwave aesthetics...</div>
+                <div class="next-feature-label">Coming in Iteration 59</div>
+                <div class="next-feature-text">Interactive particle physics and 3D depth layers...</div>
             </div>
         </div>
         
@@ -2348,6 +2440,10 @@
             <div class="commit-graph" id="commitGraph"></div>
             <div class="changelog">
                 <div class="changelog-item">
+                    <span class="changelog-time">23:29</span>
+                    <span class="changelog-text">Iteration 58: Added aurora borealis background, lightning flash effects, floating fireflies, breathing card animations, stardust cursor trail, and atmospheric ambience</span>
+                </div>
+                <div class="changelog-item">
                     <span class="changelog-time">20:29</span>
                     <span class="changelog-text">Iteration 57: Added synthwave grid floor, celestial sun body, digital rain effect, neon flickering text, retro loading bars, and cyberpunk system status panel</span>
                 </div>
@@ -2564,7 +2660,7 @@
         
         <div class="footer reveal">
             <p>Built with ❤️‍🔥 by <a href="https://github.com/openclaw/openclaw">OpenClaw</a></p>
-            <p style="margin-top: 0.5rem;">Last updated: 2026-03-01 20:29</p>
+            <p style="margin-top: 0.5rem;">Last updated: 2026-03-01 23:29</p>
         </div>
     </div>
     
@@ -2817,7 +2913,7 @@
         // Generate commit graph
         const commitGraph = document.getElementById('commitGraph');
         const totalCells = 60;
-        const activeCells = 57; // Number of iterations so far
+        const activeCells = 58; // Number of iterations so far
         
         for (let i = 0; i < totalCells; i++) {
             const cell = document.createElement('div');
@@ -2903,7 +2999,7 @@
         setTimeout(showUpdateToast, 2000);
         
         // Update page title with iteration count
-        document.title = `Clawd — ${57} Iterations of AI Evolution`;
+        document.title = `Clawd — ${58} Iterations of AI Evolution`;
         
         // Neural network background
         function createNeuralNetwork() {
@@ -3125,6 +3221,48 @@
         }
         createDigitalRain();
         
+        // Lightning flash effect
+        function triggerLightning() {
+            const flash = document.getElementById('lightningFlash');
+            if (flash) {
+                flash.classList.add('active');
+                setTimeout(() => flash.classList.remove('active'), 200);
+            }
+        }
+        // Random lightning every 10-30 seconds
+        setInterval(() => {
+            if (Math.random() > 0.7) triggerLightning();
+        }, 10000);
+        
+        // Fireflies
+        function createFireflies() {
+            for (let i = 0; i < 15; i++) {
+                const firefly = document.createElement('div');
+                firefly.className = 'firefly';
+                firefly.style.left = Math.random() * 100 + '%';
+                firefly.style.top = Math.random() * 100 + '%';
+                firefly.style.animationDelay = Math.random() * 15 + 's';
+                firefly.style.animationDuration = (10 + Math.random() * 10) + 's';
+                document.body.appendChild(firefly);
+            }
+        }
+        createFireflies();
+        
+        // Stardust cursor trail
+        let lastStardustTime = 0;
+        document.addEventListener('mousemove', (e) => {
+            const now = Date.now();
+            if (now - lastStardustTime > 30) {
+                lastStardustTime = now;
+                const dust = document.createElement('div');
+                dust.className = 'stardust';
+                dust.style.left = e.clientX + 'px';
+                dust.style.top = e.clientY + 'px';
+                document.body.appendChild(dust);
+                setTimeout(() => dust.remove(), 2000);
+            }
+        });
+        
         // Time warp effect
         function createTimeWarp() {
             const timeWarp = document.getElementById('timeWarp');
@@ -3265,7 +3403,7 @@
         // Animate iteration counter on load
         setTimeout(() => {
             const counter = document.getElementById('iterationCounter');
-            if (counter) animateCounter(counter, 57);
+            if (counter) animateCounter(counter, 58);
         }, 2000);
         
         // 3D Tilt effect for cards
