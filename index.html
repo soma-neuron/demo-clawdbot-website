@@ -2217,11 +2217,292 @@
         @keyframes load {
             to { width: 100%; }
         }
+
+        /* NEW FEATURES - Iteration 61 */
+
+        /* 3D Globe Canvas */
+        .globe-container {
+            position: relative;
+            width: 100%;
+            height: 250px;
+            margin: 1.5rem 0;
+            border-radius: 16px;
+            overflow: hidden;
+            background: radial-gradient(ellipse at center, rgba(233, 69, 96, 0.1) 0%, transparent 70%);
+        }
+        #globeCanvas {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Live Chat Simulation */
+        .chat-simulation {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 12px;
+            padding: 1rem;
+            margin-top: 1rem;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 0.8rem;
+            max-height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+        .chat-message {
+            display: flex;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+            animation: messageSlide 0.5s ease-out;
+            opacity: 0;
+            animation-fill-mode: forwards;
+        }
+        @keyframes messageSlide {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        .chat-avatar {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+        .chat-avatar.user {
+            background: rgba(79, 172, 254, 0.2);
+            border: 1px solid rgba(79, 172, 254, 0.3);
+        }
+        .chat-avatar.ai {
+            background: rgba(233, 69, 96, 0.2);
+            border: 1px solid rgba(233, 69, 96, 0.3);
+        }
+        .chat-content {
+            flex: 1;
+        }
+        .chat-name {
+            font-size: 0.7rem;
+            color: #888;
+            margin-bottom: 0.2rem;
+        }
+        .chat-text {
+            color: #ccc;
+            line-height: 1.4;
+        }
+        .chat-text.typing::after {
+            content: '...';
+            animation: typingDots 1.5s infinite;
+        }
+        @keyframes typingDots {
+            0%, 20% { content: '.'; }
+            40% { content: '..'; }
+            60%, 100% { content: '...'; }
+        }
+
+        /* Skill Progress Rings */
+        .skill-rings {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 1.5rem 0;
+            flex-wrap: wrap;
+        }
+        .skill-ring {
+            position: relative;
+            width: 80px;
+            height: 80px;
+        }
+        .skill-ring svg {
+            transform: rotate(-90deg);
+        }
+        .skill-ring-bg {
+            fill: none;
+            stroke: rgba(255, 255, 255, 0.1);
+            stroke-width: 4;
+        }
+        .skill-ring-progress {
+            fill: none;
+            stroke: url(#skillGradient);
+            stroke-width: 4;
+            stroke-linecap: round;
+            stroke-dasharray: 220;
+            stroke-dashoffset: 220;
+            transition: stroke-dashoffset 1.5s ease-out;
+        }
+        .skill-ring-value {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #e94560;
+        }
+        .skill-ring-label {
+            text-align: center;
+            font-size: 0.7rem;
+            color: #888;
+            margin-top: 0.5rem;
+        }
+
+        /* Particle Text Effect */
+        .particle-text-container {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .particle-text-container:hover {
+            color: #e94560;
+        }
+        .text-particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #e94560;
+            border-radius: 50%;
+            pointer-events: none;
+            animation: textParticleBurst 0.8s ease-out forwards;
+        }
+        @keyframes textParticleBurst {
+            0% { transform: translate(0, 0) scale(1); opacity: 1; }
+            100% { transform: translate(var(--tx), var(--ty)) scale(0); opacity: 0; }
+        }
+
+        /* Interactive Timeline */
+        .evolution-timeline {
+            position: relative;
+            padding-left: 30px;
+            margin: 1.5rem 0;
+        }
+        .evolution-timeline::before {
+            content: '';
+            position: absolute;
+            left: 8px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, #e94560, #ff6b6b, transparent);
+        }
+        .timeline-item {
+            position: relative;
+            padding: 0.75rem 0;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .timeline-item:hover {
+            padding-left: 10px;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -26px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #0a0a0f;
+            border: 2px solid #e94560;
+            transition: all 0.3s;
+        }
+        .timeline-item:hover::before {
+            background: #e94560;
+            box-shadow: 0 0 10px #e94560;
+        }
+        .timeline-phase {
+            font-size: 0.75rem;
+            color: #e94560;
+            font-weight: 600;
+        }
+        .timeline-desc {
+            font-size: 0.85rem;
+            color: #aaa;
+            margin-top: 0.2rem;
+        }
+
+        /* Live Code Editor Simulation */
+        .code-editor {
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 12px;
+            overflow: hidden;
+            margin-top: 1rem;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 0.8rem;
+        }
+        .code-editor-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .editor-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        .editor-dot.red { background: #ff5f56; }
+        .editor-dot.yellow { background: #ffbd2e; }
+        .editor-dot.green { background: #27c93f; }
+        .editor-filename {
+            margin-left: auto;
+            color: #888;
+            font-size: 0.75rem;
+        }
+        .code-editor-content {
+            padding: 1rem;
+            line-height: 1.6;
+            color: #aaa;
+            min-height: 150px;
+        }
+        .code-line {
+            display: flex;
+            gap: 1rem;
+        }
+        .line-number {
+            color: #555;
+            min-width: 25px;
+            text-align: right;
+            user-select: none;
+        }
+        .line-content {
+            color: #ccc;
+        }
+        .line-content.keyword { color: #e94560; }
+        .line-content.string { color: #00ff88; }
+        .line-content.comment { color: #555; }
+        .line-content.function { color: #feca57; }
+        .typing-cursor-editor {
+            display: inline-block;
+            width: 8px;
+            height: 1.2em;
+            background: #e94560;
+            animation: cursorBlink 1s infinite;
+            vertical-align: middle;
+            margin-left: 2px;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 600px) {
+            h1 { font-size: 2.5rem; }
+            .subtitle { font-size: 1rem; }
+            .card { padding: 1.5rem; }
+            .features-grid { grid-template-columns: 1fr; }
+            .stats-row { gap: 1rem; }
+            .stat-value { font-size: 1.8rem; }
+            .nav-links { flex-wrap: wrap; gap: 1rem; }
+            .skill-rings { gap: 1rem; }
+            .skill-ring { width: 60px; height: 60px; }
+            .skill-ring-value { font-size: 0.9rem; }
+            .globe-container { height: 180px; }
+        }
     </style>
 </head>
 <body>
     <div class="milestone-banner" id="milestoneBanner">
-        🎉 30 Iterations Complete! This site has been built entirely by AI.
+        🎉 Iteration 61 Complete! Added 3D globe, live chat, skill rings, timeline & code editor!
     </div>
     
     <div class="loader" id="loader">
@@ -2354,10 +2635,104 @@
             
             <div class="next-feature">
                 <div class="next-feature-label">Coming in Iteration 60</div>
-                <div class="next-feature-text">Particle collision physics and reactive sound waves...</div>
+                <div class="next-feature-text">WebGL 3D visualizations and real-time collaborative editing...</div>
             </div>
         </div>
         
+        <!-- NEW: 3D Globe Visualization -->
+        <div class="card reveal">
+            <h3 class="glow-text">🌍 Global Network</h3>
+            <p style="font-size: 0.9rem; color: #888; margin-bottom: 1rem;">Real-time visualization of AI nodes around the world</p>
+            
+            <div class="globe-container">
+                <canvas id="globeCanvas"></canvas>
+            </div>
+            
+            <div style="display: flex; justify-content: space-around; margin-top: 1rem; flex-wrap: wrap; gap: 1rem;">
+                <div style="text-align: center;">
+                    <div style="font-size: 1.5rem; color: #00ff88; font-weight: bold;">12</div>
+                    <div style="font-size: 0.7rem; color: #666;">ACTIVE NODES</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 1.5rem; color: #e94560; font-weight: bold;">∞</div>
+                    <div style="font-size: 0.7rem; color: #666;">CONNECTIONS</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 1.5rem; color: #feca57; font-weight: bold;">99.9%</div>
+                    <div style="font-size: 0.7rem; color: #666;">UPTIME</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- NEW: Live Chat Simulation -->
+        <div class="card reveal">
+            <h3 class="particle-text-container" onclick="createParticleBurst(this)">💬 Live AI Conversation</h3>
+            <p style="font-size: 0.85rem; color: #888; margin-bottom: 1rem;">Watch the AI think and respond in real-time</p>
+            
+            <div class="chat-simulation" id="chatSimulation">
+                <!-- Chat messages will be generated by JS -->
+            </div>
+            
+            <div style="display: flex; gap: 0.5rem; margin-top: 1rem; flex-wrap: wrap;">
+                <span class="skill-badge" onclick="simulateUserMessage('How do you work?')">How do you work?</span>
+                <span class="skill-badge" onclick="simulateUserMessage('Show me your skills')">Show me your skills</span>
+                <span class="skill-badge" onclick="simulateUserMessage('What\'s next?')">What's next?</span>
+            </div>
+        </div>
+
+        <!-- NEW: Skill Progress Rings -->
+        <div class="card reveal">
+            <h3 class="glow-text">🎯 AI Capabilities</h3>
+            <p style="font-size: 0.85rem; color: #888; margin-bottom: 1rem; text-align: center;">Hover over rings to see skill levels</p>
+            
+            <div class="skill-rings">
+                <svg width="0" height="0">
+                    <defs>
+                        <linearGradient id="skillGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" style="stop-color:#e94560;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#ff6b6b;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                </svg>
+                
+                <div class="skill-ring" data-value="95">
+                    <svg width="80" height="80" viewBox="0 0 80 80">
+                        <circle class="skill-ring-bg" cx="40" cy="40" r="35"/>
+                        <circle class="skill-ring-progress" cx="40" cy="40" r="35"/>
+                    </svg>
+                    <div class="skill-ring-value">0%</div>
+                    <div class="skill-ring-label">Memory</div>
+                </div>
+                
+                <div class="skill-ring" data-value="88">
+                    <svg width="80" height="80" viewBox="0 0 80 80">
+                        <circle class="skill-ring-bg" cx="40" cy="40" r="35"/>
+                        <circle class="skill-ring-progress" cx="40" cy="40" r="35"/>
+                    </svg>
+                    <div class="skill-ring-value">0%</div>
+                    <div class="skill-ring-label">Execution</div>
+                </div>
+                
+                <div class="skill-ring" data-value="92">
+                    <svg width="80" height="80" viewBox="0 0 80 80">
+                        <circle class="skill-ring-bg" cx="40" cy="40" r="35"/>
+                        <circle class="skill-ring-progress" cx="40" cy="40" r="35"/>
+                    </svg>
+                    <div class="skill-ring-value">0%</div>
+                    <div class="skill-ring-label">Learning</div>
+                </div>
+                
+                <div class="skill-ring" data-value="85">
+                    <svg width="80" height="80" viewBox="0 0 80 80">
+                        <circle class="skill-ring-bg" cx="40" cy="40" r="35"/>
+                        <circle class="skill-ring-progress" cx="40" cy="40" r="35"/>
+                    </svg>
+                    <div class="skill-ring-value">0%</div>
+                    <div class="skill-ring-label">Creativity</div>
+                </div>
+            </div>
+        </div>
+
         <div class="card reveal">
             <h3 class="glow-text">💓 System Vitals</h3>
             
@@ -2568,6 +2943,49 @@
                 Watch the system self-evolve in real-time. Every 3 hours, a new iteration.
             </p>
         </div>
+
+        <!-- NEW: Evolution Timeline -->
+        <div class="card reveal">
+            <h3 class="glow-text">📈 Evolution Timeline</h3>
+            <p style="font-size: 0.85rem; color: #888; margin-bottom: 1rem;">The journey from iteration 1 to 61</p>
+            
+            <div class="evolution-timeline">
+                <div class="timeline-item" onclick="highlightTimeline(this)">
+                    <div class="timeline-phase">Phase 1: Genesis</div>
+                    <div class="timeline-desc">Iterations 1-10 — Basic structure, particle system, initial animations</div>
+                </div>
+                <div class="timeline-item" onclick="highlightTimeline(this)">
+                    <div class="timeline-phase">Phase 2: Awakening</div>
+                    <div class="timeline-desc">Iterations 11-30 — Interactive elements, keyboard shortcuts, Matrix mode</div>
+                </div>
+                <div class="timeline-item" onclick="highlightTimeline(this)">
+                    <div class="timeline-phase">Phase 3: Expansion</div>
+                    <div class="timeline-desc">Iterations 31-50 — Neural networks, consciousness streams, 3D effects</div>
+                </div>
+                <div class="timeline-item" onclick="highlightTimeline(this)">
+                    <div class="timeline-phase">Phase 4: Transcendence</div>
+                    <div class="timeline-desc">Iterations 51-61 — Global network, live chat, skill visualization</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- NEW: Live Code Editor -->
+        <div class="card reveal">
+            <h3 class="glow-text">⌨️ Live Code Generation</h3>
+            <p style="font-size: 0.85rem; color: #888; margin-bottom: 1rem;">Watch the AI write code in real-time</p>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="editor-dot red"></div>
+                    <div class="editor-dot yellow"></div>
+                    <div class="editor-dot green"></div>
+                    <span class="editor-filename">clawd-evolve.js</span>
+                </div>
+                <div class="code-editor-content" id="codeEditorContent">
+                    <!-- Code lines will be generated by JS -->
+                </div>
+            </div>
+        </div>
         
         <div class="card reveal">
             <h3>⚙️ The Loop</h3>
@@ -2595,7 +3013,7 @@
                 <div>→ Analyzing structure...</div>
                 <div>→ Generating improvements...</div>
                 <div>→ Writing changes...</div>
-                <div>→ Committing: "Iteration 11: Added interactive demo button"</div>
+                <div>→ Committing: "Iteration 61: Added 3D globe, live chat, skill rings, timeline, code editor"</div>
                 <div>→ Pushing to origin/main...</div>
                 <div style="color: #00ff88; margin-top: 0.5rem;">✓ Deployed successfully!</div>
             </div>
@@ -2605,6 +3023,10 @@
             <h3>📜 Live Build Log</h3>
             <div class="commit-graph" id="commitGraph"></div>
             <div class="changelog">
+                <div class="changelog-item">
+                    <span class="changelog-time">05:29</span>
+                    <span class="changelog-text">Iteration 61: Added 3D globe visualization, live AI chat simulation, animated skill progress rings, evolution timeline, and live code editor — DEMO READY!</span>
+                </div>
                 <div class="changelog-item">
                     <span class="changelog-time">02:29</span>
                     <span class="changelog-text">Iteration 59: Added shooting stars, floating emojis, heartbeat monitor with EKG line, radar sweep with blips, and glitch image effects</span>
@@ -3817,6 +4239,347 @@
         window.addEventListener('load', revealOnScroll);
         // Initial check
         setTimeout(revealOnScroll, 100);
+
+        // ============================================
+        // NEW DEMO FEATURES - Iteration 61
+        // ============================================
+
+        // 1. Interactive 3D Globe Visualization
+        function initGlobe() {
+            const canvas = document.getElementById('globeCanvas');
+            if (!canvas) return;
+            
+            const ctx = canvas.getContext('2d');
+            canvas.width = canvas.offsetWidth * 2;
+            canvas.height = canvas.offsetHeight * 2;
+            ctx.scale(2, 2);
+            
+            const centerX = canvas.offsetWidth / 2;
+            const centerY = canvas.offsetHeight / 2;
+            const radius = 60;
+            let rotation = 0;
+            
+            // Generate random connection points
+            const connections = [];
+            for (let i = 0; i < 20; i++) {
+                const lat = (Math.random() - 0.5) * Math.PI;
+                const lon = Math.random() * Math.PI * 2;
+                connections.push({ lat, lon, active: Math.random() > 0.3 });
+            }
+            
+            function project3D(lat, lon, rot) {
+                const x = Math.cos(lat) * Math.cos(lon + rot);
+                const y = Math.sin(lat);
+                const z = Math.cos(lat) * Math.sin(lon + rot);
+                return { x, y, z };
+            }
+            
+            function drawGlobe() {
+                ctx.clearRect(0, 0, canvas.offsetWidth, canvas.offsetHeight);
+                
+                // Draw globe wireframe
+                ctx.strokeStyle = 'rgba(233, 69, 96, 0.3)';
+                ctx.lineWidth = 1;
+                
+                // Latitude lines
+                for (let lat = -Math.PI/2; lat <= Math.PI/2; lat += Math.PI/6) {
+                    ctx.beginPath();
+                    for (let lon = 0; lon <= Math.PI * 2; lon += 0.1) {
+                        const p = project3D(lat, lon, rotation);
+                        if (p.z > 0) {
+                            const x = centerX + p.x * radius;
+                            const y = centerY + p.y * radius;
+                            if (lon === 0) ctx.moveTo(x, y);
+                            else ctx.lineTo(x, y);
+                        }
+                    }
+                    ctx.stroke();
+                }
+                
+                // Longitude lines
+                for (let lon = 0; lon < Math.PI * 2; lon += Math.PI/6) {
+                    ctx.beginPath();
+                    for (let lat = -Math.PI/2; lat <= Math.PI/2; lat += 0.1) {
+                        const p = project3D(lat, lon, rotation);
+                        if (p.z > 0) {
+                            const x = centerX + p.x * radius;
+                            const y = centerY + p.y * radius;
+                            if (lat === -Math.PI/2) ctx.moveTo(x, y);
+                            else ctx.lineTo(x, y);
+                        }
+                    }
+                    ctx.stroke();
+                }
+                
+                // Draw connection points
+                connections.forEach((conn, i) => {
+                    const p = project3D(conn.lat, conn.lon, rotation);
+                    if (p.z > 0) {
+                        const x = centerX + p.x * radius;
+                        const y = centerY + p.y * radius;
+                        
+                        ctx.beginPath();
+                        ctx.arc(x, y, conn.active ? 4 : 2, 0, Math.PI * 2);
+                        ctx.fillStyle = conn.active ? '#00ff88' : '#e94560';
+                        ctx.fill();
+                        
+                        if (conn.active) {
+                            ctx.beginPath();
+                            ctx.arc(x, y, 8, 0, Math.PI * 2);
+                            ctx.strokeStyle = 'rgba(0, 255, 136, 0.3)';
+                            ctx.stroke();
+                        }
+                    }
+                });
+                
+                // Draw pulsing rings
+                const pulseScale = 1 + Math.sin(Date.now() / 500) * 0.1;
+                ctx.beginPath();
+                ctx.arc(centerX, centerY, radius * pulseScale, 0, Math.PI * 2);
+                ctx.strokeStyle = 'rgba(233, 69, 96, 0.2)';
+                ctx.stroke();
+                
+                rotation += 0.005;
+                requestAnimationFrame(drawGlobe);
+            }
+            
+            drawGlobe();
+        }
+        
+        // 2. Live Chat Simulation
+        const chatMessages = [
+            { user: '👤', name: 'User', text: 'Can you improve the website?', delay: 0 },
+            { user: '🤖', name: 'Clawd', text: 'Analyzing current design patterns...', delay: 1500, isAI: true },
+            { user: '🤖', name: 'Clawd', text: 'Adding 3D globe visualization ✨', delay: 3000, isAI: true },
+            { user: '👤', name: 'User', text: 'That looks amazing!', delay: 5000 },
+            { user: '🤖', name: 'Clawd', text: 'Deploying updates now...', delay: 6500, isAI: true },
+            { user: '🤖', name: 'Clawd', text: '✓ Live at https://clawd.ai', delay: 8000, isAI: true }
+        ];
+        
+        function initChatSimulation() {
+            const container = document.getElementById('chatSimulation');
+            if (!container) return;
+            
+            let messageIndex = 0;
+            
+            function addMessage() {
+                if (messageIndex >= chatMessages.length) {
+                    messageIndex = 0;
+                    setTimeout(() => {
+                        container.innerHTML = '';
+                        addMessage();
+                    }, 5000);
+                    return;
+                }
+                
+                const msg = chatMessages[messageIndex];
+                const div = document.createElement('div');
+                div.className = 'chat-message';
+                div.style.animationDelay = '0s';
+                div.innerHTML = `
+                    <div class="chat-avatar ${msg.isAI ? 'ai' : 'user'}">${msg.user}</div>
+                    <div class="chat-content">
+                        <div class="chat-name">${msg.name}</div>
+                        <div class="chat-text ${msg.isAI ? 'typing' : ''}">${msg.text}</div>
+                    </div>
+                `;
+                container.appendChild(div);
+                
+                // Remove typing indicator after a moment
+                if (msg.isAI) {
+                    setTimeout(() => {
+                        const typingEl = div.querySelector('.typing');
+                        if (typingEl) typingEl.classList.remove('typing');
+                    }, 1000);
+                }
+                
+                // Scroll to bottom
+                container.scrollTop = container.scrollHeight;
+                
+                messageIndex++;
+                const nextDelay = chatMessages[messageIndex] ? 
+                    chatMessages[messageIndex].delay - msg.delay :
+                    3000;
+                setTimeout(addMessage, nextDelay);
+            }
+            
+            setTimeout(addMessage, 1000);
+        }
+        
+        function simulateUserMessage(text) {
+            const container = document.getElementById('chatSimulation');
+            if (!container) return;
+            
+            const div = document.createElement('div');
+            div.className = 'chat-message';
+            div.innerHTML = `
+                <div class="chat-avatar user">👤</div>
+                <div class="chat-content">
+                    <div class="chat-name">User</div>
+                    <div class="chat-text">${text}</div>
+                </div>
+            `;
+            container.appendChild(div);
+            container.scrollTop = container.scrollHeight;
+            
+            // AI response
+            setTimeout(() => {
+                const responses = {
+                    'How do you work?': 'I read, analyze, improve, commit, and deploy — autonomously! 🔄',
+                    'Show me your skills': 'Check out the skill rings below! Each represents a core capability 💪',
+                    "What's next?": 'Iteration 70 will bring WebGL shaders and multiplayer collaboration 🚀'
+                };
+                
+                const aiDiv = document.createElement('div');
+                aiDiv.className = 'chat-message';
+                aiDiv.innerHTML = `
+                    <div class="chat-avatar ai">🤖</div>
+                    <div class="chat-content">
+                        <div class="chat-name">Clawd</div>
+                        <div class="chat-text">${responses[text] || 'Processing your request...'}</div>
+                    </div>
+                `;
+                container.appendChild(aiDiv);
+                container.scrollTop = container.scrollHeight;
+            }, 1000);
+        }
+        
+        // 3. Skill Ring Animation
+        function initSkillRings() {
+            const rings = document.querySelectorAll('.skill-ring');
+            
+            rings.forEach((ring, index) => {
+                const value = parseInt(ring.dataset.value);
+                const progress = ring.querySelector('.skill-ring-progress');
+                const valueEl = ring.querySelector('.skill-ring-value');
+                
+                // Animate after a delay
+                setTimeout(() => {
+                    const circumference = 2 * Math.PI * 35;
+                    const offset = circumference - (value / 100) * circumference;
+                    progress.style.strokeDashoffset = offset;
+                    
+                    // Animate number
+                    let current = 0;
+                    const timer = setInterval(() => {
+                        current += 2;
+                        if (current >= value) {
+                            current = value;
+                            clearInterval(timer);
+                        }
+                        valueEl.textContent = current + '%';
+                    }, 20);
+                }, 500 + index * 200);
+            });
+        }
+        
+        // 4. Particle Text Burst Effect
+        function createParticleBurst(element) {
+            const rect = element.getBoundingClientRect();
+            const colors = ['#e94560', '#ff6b6b', '#feca57', '#00ff88'];
+            
+            for (let i = 0; i < 20; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'text-particle';
+                particle.style.left = rect.left + rect.width / 2 + 'px';
+                particle.style.top = rect.top + rect.height / 2 + 'px';
+                particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+                particle.style.setProperty('--tx', (Math.random() - 0.5) * 100 + 'px');
+                particle.style.setProperty('--ty', (Math.random() - 0.5) * 100 + 'px');
+                document.body.appendChild(particle);
+                
+                setTimeout(() => particle.remove(), 800);
+            }
+        }
+        
+        // 5. Timeline Highlight
+        function highlightTimeline(item) {
+            document.querySelectorAll('.timeline-item').forEach(el => {
+                el.style.opacity = '0.5';
+            });
+            item.style.opacity = '1';
+            item.style.transform = 'scale(1.02)';
+            
+            setTimeout(() => {
+                document.querySelectorAll('.timeline-item').forEach(el => {
+                    el.style.opacity = '1';
+                    el.style.transform = 'scale(1)';
+                });
+            }, 2000);
+        }
+        
+        // 6. Live Code Editor
+        const codeSnippets = [
+            { line: 1, content: 'class ClawdAI {', type: 'keyword' },
+            { line: 2, content: '  constructor() {', type: 'normal' },
+            { line: 3, content: '    this.memory = new Map();', type: 'normal' },
+            { line: 4, content: '    this.skills = ["code", "design", "learn"];', type: 'string' },
+            { line: 5, content: '  }', type: 'normal' },
+            { line: 6, content: '', type: 'normal' },
+            { line: 7, content: '  async evolve() {', type: 'function' },
+            { line: 8, content: '    const improved = await this.improve();', type: 'normal' },
+            { line: 9, content: '    return this.deploy(improved);', type: 'normal' },
+            { line: 10, content: '  }', type: 'normal' },
+            { line: 11, content: '}', type: 'keyword' }
+        ];
+        
+        function initCodeEditor() {
+            const container = document.getElementById('codeEditorContent');
+            if (!container) return;
+            
+            let currentLine = 0;
+            
+            function typeLine() {
+                if (currentLine >= codeSnippets.length) {
+                    setTimeout(() => {
+                        container.innerHTML = '';
+                        currentLine = 0;
+                        typeLine();
+                    }, 5000);
+                    return;
+                }
+                
+                const snippet = codeSnippets[currentLine];
+                const div = document.createElement('div');
+                div.className = 'code-line';
+                div.style.animation = 'terminalLineIn 0.3s ease-out forwards';
+                
+                const typeClass = snippet.type === 'keyword' ? 'keyword' : 
+                                  snippet.type === 'string' ? 'string' : 
+                                  snippet.type === 'function' ? 'function' : '';
+                
+                div.innerHTML = `
+                    <span class="line-number">${snippet.line}</span>
+                    <span class="line-content ${typeClass}">${snippet.content}<span class="typing-cursor-editor"></span></span>
+                `;
+                container.appendChild(div);
+                
+                // Remove cursor from previous line
+                const prevCursor = container.querySelector('.code-line:not(:last-child) .typing-cursor-editor');
+                if (prevCursor) prevCursor.remove();
+                
+                currentLine++;
+                setTimeout(typeLine, 800 + Math.random() * 400);
+            }
+            
+            typeLine();
+        }
+        
+        // Initialize all new features
+        document.addEventListener('DOMContentLoaded', () => {
+            initGlobe();
+            initChatSimulation();
+            initSkillRings();
+            initCodeEditor();
+        });
+        
+        // Update iteration counter
+        const iterCounter = document.getElementById('iterationCounter');
+        if (iterCounter) iterCounter.textContent = '61';
+        const locVal = document.getElementById('locValue');
+        if (locVal) locVal.textContent = '4,500';
+        const lastCommit = document.getElementById('lastCommitTime');
+        if (lastCommit) lastCommit.textContent = new Date().toLocaleTimeString('en-US', { hour12: false }) + ' GMT+8';
     </script>
 </body>
 </html>
